@@ -7,49 +7,70 @@
     android:layout_height="match_parent"
     tools:context=".Fragment_home">
 
-    <ImageView
-        android:id="@+id/img_dangBody"
-        android:layout_width="408dp"
-        android:layout_height="331dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="52dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="410dp"
+        android:layout_height="396dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/img_dangbody" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/img_activity"
-        android:layout_width="122dp"
-        android:layout_height="123dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
-        app:layout_constraintStart_toStartOf="@+id/img_dangBody"
-        app:layout_constraintTop_toBottomOf="@+id/img_dangBody"
-        tools:srcCompat="@drawable/dang1" />
+        <ImageView
+            android:id="@+id/img_myPage"
+            android:layout_width="39dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_mypage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/img_record"
-        android:layout_width="130dp"
-        android:layout_height="117dp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_activity"
-        app:layout_constraintEnd_toEndOf="@+id/img_dangBody"
-        app:layout_constraintHorizontal_bias="0.829"
-        app:layout_constraintStart_toEndOf="@+id/img_activity"
-        app:layout_constraintTop_toTopOf="@+id/img_activity"
-        app:layout_constraintVertical_bias="0.833"
-        tools:srcCompat="@drawable/dang1" />
+        <ImageView
+            android:id="@+id/img_dangBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dangbody_pressed_drawable"
+            android:src="@drawable/img_dangbody"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/img_myPage"
-        android:layout_width="39dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_mypage"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="412dp"
+        android:layout_height="137dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.965"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <ImageView
+            android:id="@+id/img_record"
+            android:layout_width="130dp"
+            android:layout_height="117dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/img_activity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/dang1" />
+
+        <ImageView
+            android:id="@+id/img_activity"
+            android:layout_width="122dp"
+            android:layout_height="123dp"
+            android:layout_marginEnd="44dp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_record"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img_record"
+            app:layout_constraintVertical_bias="0.0"
+            tools:srcCompat="@drawable/dang1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="62dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

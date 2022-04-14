@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true"
+        android:drawable="@drawable/img_dangbody_pressed"/>
+
+    <item android:drawable="@drawable/img_dangbody"/>
+
+    <item android:state_pressed="true"
+        android:drawable="@drawable/img_activity_pressed"/>
+
+    <item android:drawable="@drawable/img_activity"/>
+
+    <item android:state_pressed="true"
+        android:drawable="@drawable/img_record_pressed"/>
+
+    <item android:drawable="@drawable/img_record"/>
+</selector>
