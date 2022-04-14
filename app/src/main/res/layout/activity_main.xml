@@ -32,8 +32,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:itemIconSize="75sp"
-        app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="#707070"
+        app:itemIconSize="65sp"
+        app:itemTextColor="@color/black"
+        app:labelVisibilityMode="auto"
 
         app:menu="@menu/bottom_menu" >
 
