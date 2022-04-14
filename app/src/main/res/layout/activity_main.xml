@@ -32,7 +32,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:menu="@menu/bootom_menu" >
+        app:itemIconSize="75sp"
+        app:labelVisibilityMode="unlabeled"
+
+        app:menu="@menu/bottom_menu" >
+
+<!--        하단바 아이콘 아래 홈/활동/일지/소통 계속 글씨 보이게 해주는 코드
+            app:labelVisibilityMode="labeled"-->
+
+
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 </androidx.constraintlayout.widget.ConstraintLayout>

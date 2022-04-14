@@ -11,9 +11,11 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_splash);
 
 
+        Intent intent  = new Intent(SplashActivity.this, MainActivity.class);
+        startActivity(intent);
         try{
             Thread.sleep(4000);
 

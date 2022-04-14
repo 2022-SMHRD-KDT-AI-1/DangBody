@@ -36,7 +36,7 @@ public class Fragment_home extends Fragment {
         img_myPage=(ImageView) view.findViewById(R.id.img_myPage);
 
         // 댕바디 이미지 띄워주기
-        img_dangBody.setImageResource(R.drawable.dang1);
+        img_dangBody.setImageResource(R.drawable.img_dangbody);
         img_activity.setImageResource(R.drawable.dang1);
         img_record.setImageResource(R.drawable.dang1);
 
