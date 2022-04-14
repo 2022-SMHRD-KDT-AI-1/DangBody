@@ -36,9 +36,11 @@ public class Fragment_home extends Fragment {
         img_myPage=(ImageView) view.findViewById(R.id.img_myPage);
 
         // 댕바디 이미지 띄워주기
-        img_dangBody.setImageResource(R.drawable.dang1);
-        img_activity.setImageResource(R.drawable.dang1);
-        img_record.setImageResource(R.drawable.dang1);
+        img_dangBody.setImageResource(R.drawable.img_dangbody);
+        img_activity.setImageResource(R.drawable.img_activity);
+        img_record.setImageResource(R.drawable.img_record);
+
+
 
         // 카메라 액티비티로 이동하기
         img_dangBody.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +53,8 @@ public class Fragment_home extends Fragment {
             }
         });
 
+
+
         img_myPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,6 +63,7 @@ public class Fragment_home extends Fragment {
                 startActivity(i);
             }
         });
+
 
 
         return view;
