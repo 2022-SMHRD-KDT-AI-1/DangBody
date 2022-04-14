@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 int pos = item.getItemId();
 
                 if(pos == R.id.item1){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragmentActivity).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragmentHome).commit();
 
                 }else if(pos == R.id.item2){
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragmentActivity).commit();
