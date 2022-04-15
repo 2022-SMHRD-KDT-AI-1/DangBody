@@ -29,7 +29,7 @@ public class Fragment_record extends Fragment {
     }
     TextView monthYearText;
     RecyclerView calendarRecyclerView;
-    Button btnWeekly;
+    Button btnWeekly, btnPrevMonth, btnNextMonth;
     View view;
 
 //    @RequiresApi(api = Build.VERSION_CODES.O)
@@ -39,6 +39,10 @@ public class Fragment_record extends Fragment {
                              Bundle savedInstanceState) {
 
          view = inflater.inflate(R.layout.fragment_record, container, false);
+
+        btnWeekly = view.findViewById(R.id.btnWeekly);
+        btnPrevMonth = view.findViewById(R.id.btnPrevMonth);
+        btnNextMonth = view.findViewById(R.id.btnNextMonth);
 
         initWidgets();
         CalendarUtils.selectedDate = LocalDate.now();
@@ -51,7 +55,26 @@ public class Fragment_record extends Fragment {
         // context.MODE_PRIVATE : 외부에서 파일 접근 금지 권한
 //        SharedPreferences spf = getActivity().getSharedPreferences("mySDF", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = spf.edit();
+        btnWeekly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                weeklyAction(view);
+            }
+        });
 
+        btnNextMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nextMonthAction(view);
+            }
+        });
+
+        btnPrevMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                previousMonthAction(view);
+            }
+        });
 
         return view;
     }

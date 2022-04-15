@@ -18,6 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ex220322"
         android:usesCleartextTraffic="true">
+        <activity android:name=".WeekViewActivity"
+                  android:exported="false"/>
+
+        <activity android:name=".EventEditActivity"
+                  android:exported="false"/>
+
         <activity
             android:name=".JoinPetActivity"
             android:exported="false" />
