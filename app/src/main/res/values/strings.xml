@@ -24,4 +24,10 @@
     <string name="userBirthday">생일 선택</string>
     <string name="userPwCheck">PW 확인</string>
     <string name="userPhone">전화번호 입력</string>
+
+<!--    frament_record.xml-->
+    <string name = "btnWeekly">WEEKLY</string>
+    <string name = "btnPrevMonth">◀</string>
+    <string name = "btnNextMonth">▶</string>
+
 </resources>
