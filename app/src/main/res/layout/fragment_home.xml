@@ -9,64 +9,78 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
-        android:layout_width="411dp"
-        android:layout_height="351dp"
+        android:layout_width="match_parent"
+        android:layout_height="372dp"
         app:layout_constraintEnd_toEndOf="@+id/img_dangBody"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/img_dangBody"
-            android:layout_width="331dp"
-            android:layout_height="329dp"
-            android:background="@drawable/dangbody_pressed_drawable"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="321dp"
+            android:layout_height="281dp"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/img_dangbody" />
+            tools:srcCompat="@drawable/img_dangbody_pressed" />
 
         <ImageView
             android:id="@+id/img_myPage"
             android:layout_width="49dp"
             android:layout_height="54dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_mypage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_dangbodyGallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="68dp"
+            android:layout_marginEnd="32dp"
+            android:text="댕바디목록"
+            android:textColor="#515151"
+            android:textStyle="bold"
+            app:cornerRadius="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_dangbodyCamera"
+            app:layout_constraintEnd_toEndOf="@+id/img_dangBody"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/btn_dangbodyCamera"
+            app:layout_constraintTop_toTopOf="@+id/btn_dangbodyCamera"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/btn_dangbodyCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="댕바디찍기"
+            android:textColor="#515151"
+            android:textStyle="bold"
+            app:cornerRadius="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/img_dangBody"
+            app:layout_constraintTop_toBottomOf="@+id/img_dangBody"
+            app:layout_constraintVertical_bias="0.304" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
-        android:layout_width="404dp"
+        android:layout_width="match_parent"
         android:layout_height="160dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+        app:layout_constraintVertical_bias="0.8"
+        tools:layout_editor_absoluteX="16dp" >
 
-        <ImageView
-            android:id="@+id/img_record"
-            android:layout_width="123dp"
-            android:layout_height="123dp"
-            android:layout_marginEnd="36dp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_activity"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/img_activity"
-            app:layout_constraintVertical_bias="0.0"
-            tools:srcCompat="@drawable/img_record" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-        <ImageView
-            android:id="@+id/img_activity"
-            android:layout_width="122dp"
-            android:layout_height="123dp"
-            android:layout_marginStart="32dp"
-            android:backgroundTintMode="add"
-            android:hapticFeedbackEnabled="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.864"
-            tools:srcCompat="@drawable/img_activity" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -76,4 +90,8 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_end="62dp" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
