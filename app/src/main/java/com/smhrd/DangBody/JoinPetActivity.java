@@ -65,7 +65,7 @@ public class JoinPetActivity extends AppCompatActivity {
                 Log.d(TEST, petYear);
                 Log.d(TEST, petGender);
 
-                String url = "http://220.71.97.178:8082/TEST/JoinPetService";
+                String url = "http://220.71.97.178:8082/dangbody/JoinPetService";
                 Log.d("확인","클릭완");
                 Intent idIntent = getIntent();
 
