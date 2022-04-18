@@ -5,24 +5,31 @@
     android:id="@+id/frame_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbarSize="24sp"
     tools:context=".Fragment_home">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
         android:layout_width="match_parent"
         android:layout_height="372dp"
-        app:layout_constraintEnd_toEndOf="@+id/img_dangBody"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!--        댕바디 이미지 -->
+
+        <!--        마이페이지 아이콘 -->
         <ImageView
             android:id="@+id/img_dangBody"
             android:layout_width="321dp"
             android:layout_height="281dp"
-            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.175"
             tools:srcCompat="@drawable/img_dangbody_pressed" />
 
         <ImageView
@@ -35,6 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!--        댕바디 목록-->
         <Button
             android:id="@+id/btn_dangbodyGallery"
             android:layout_width="wrap_content"
@@ -52,6 +60,7 @@
             app:layout_constraintTop_toTopOf="@+id/btn_dangbodyCamera"
             app:layout_constraintVertical_bias="0.0" />
 
+        <!--        댕바디 찍기-->
         <Button
             android:id="@+id/btn_dangbodyCamera"
             android:layout_width="wrap_content"
@@ -66,20 +75,52 @@
             app:layout_constraintTop_toBottomOf="@+id/img_dangBody"
             app:layout_constraintVertical_bias="0.304" />
 
+        <Button
+            android:id="@+id/btn_testLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="test_로그인"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.049" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline11"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
-        app:layout_constraintVertical_bias="0.8"
-        tools:layout_editor_absoluteX="16dp" >
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <!--    bottomNavi 가이드라인-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="157dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="376dp"
+            android:layout_height="138dp"
+            android:background="#F4F4F4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_dangbodyInfo"
+            android:layout_width="344dp"
+            android:layout_height="95dp"
+            android:textAlignment="gravity"
+            android:textColor="#323232"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -90,8 +131,4 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_end="62dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
