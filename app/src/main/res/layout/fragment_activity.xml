@@ -48,7 +48,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#EA1212"
@@ -81,6 +81,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/timerText"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnWr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="일지로출발~"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnPause"
+            app:layout_constraintTop_toBottomOf="@+id/btnCamera" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
