@@ -35,4 +35,7 @@
     <string name="btn_gallery">갤러리</string>
     <string name="btn_send">전송</string>
 
+<!--    activity_write.xml-->
+    <string name="newEdit">새 게시물</string>
+    <string name="StringValue">이미지가 열리지 않습니다.</string>
 </resources>
