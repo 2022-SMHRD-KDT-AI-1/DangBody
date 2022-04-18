@@ -30,7 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.175"
-            tools:srcCompat="@drawable/img_dangbody_pressed" />
+            tools:srcCompat="@drawable/img_dangbody" />
 
         <ImageView
             android:id="@+id/img_myPage"
