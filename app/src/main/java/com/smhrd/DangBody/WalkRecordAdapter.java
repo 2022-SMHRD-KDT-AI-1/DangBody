@@ -58,7 +58,7 @@ public class WalkRecordAdapter extends RecyclerView.Adapter<WalkRecordAdapter.Vi
         public ViewHolder(View itemView) {
             super(itemView);
 
-            date = itemView.findViewById(R.id.date);
+            date = itemView.findViewById(R.id.textView);
             time = itemView.findViewById(R.id.time);
             meters = itemView.findViewById(R.id.meters);
         }

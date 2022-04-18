@@ -1,6 +1,5 @@
 package com.smhrd.DangBody;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,10 +22,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class WalkRecordActivity extends AppCompatActivity {
 
@@ -46,7 +43,7 @@ public class WalkRecordActivity extends AppCompatActivity {
 
         time = findViewById(R.id.time);
         meters = findViewById(R.id.meters);
-        date = findViewById(R.id.date);
+        date = findViewById(R.id.textView);
 
 
         userID = loginData.getString("user_id","없음");
