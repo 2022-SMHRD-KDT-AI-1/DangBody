@@ -29,6 +29,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.smhrd.DangBody.R;
@@ -106,17 +107,51 @@ public class CameraActivity extends AppCompatActivity {
 
         //base64형태로 변환된 이미지 데이터를 플라스크 서버로 전송
         String flask_url = "http://121.147.52.96:5000/sendFrame";
+
+        ImageRequest imageRequest = new ImageRequest(
+                flask_url,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+//                        byte[] arr = Base64.decode(response, Base64.NO_WRAP);
+//                        Bitmap bm = BitmapFactory.decodeByteArray(arr, 0, arr.length);
+                        img.setImageBitmap(response);
+                    }
+                }, 0, 0, Bitmap.Config.ARGB_8888,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("image", imageString);
+
+                return params;
+            }
+        };
+
+        queue.add(imageRequest);
+
         StringRequest request = new StringRequest(Request.Method.POST, flask_url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         progress.dismiss();
-                        if(response.equals("true")){
-                            Toast.makeText(CameraActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
-                        }
-                        else{
-                            Toast.makeText(CameraActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
-                        }
+//                        if(response.equals("true")){
+//                            Toast.makeText(CameraActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
+//                        }
+//                        else{
+//                            Toast.makeText(CameraActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
+//                        }
+                        Log.d("base64_string", response);
+
+//                        byte[] arr = Base64.decode(response, Base64.NO_WRAP);
+//                        Bitmap bm = BitmapFactory.decodeByteArray(arr, 0, arr.length);
+//                        img.setImageBitmap(bm);
                     }
                 },
                 new Response.ErrorListener() {
@@ -135,7 +170,8 @@ public class CameraActivity extends AppCompatActivity {
             }
         };
 
-        queue.add(request);
+        Log.d("CameraActivity","실행전");
+//        queue.add(request);
     }
 
     @Override

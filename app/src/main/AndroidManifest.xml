@@ -43,6 +43,9 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".WalkRecordActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme"
             android:exported="true">

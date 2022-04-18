@@ -35,13 +35,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
@@ -54,9 +49,6 @@ import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -66,10 +58,8 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -89,11 +79,11 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     boolean isWalking = true;
     Marker oldMarker = null;
     CameraPosition cameraPosition;
-    double meters;
     //추가(타이머)
     Timer timer;
     TimerTask timerTask;
     Double time = 0.0;
+    Button btnWr;
 
     // 서버 전송용 변수
     String walkTime, distance, currentDay;
@@ -127,10 +117,6 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         btnCamera = view.findViewById(R.id.btnCamera);
         distanceText = view.findViewById(R.id.distanceText);
         locationSource = new FusedLocationSource(getActivity(), LOCATION_PERMISSION_REQUEST_CODE);
-
-        if(requestQueue == null){
-            requestQueue = Volley.newRequestQueue(getActivity());
-        }
 
         //카메라 메소드 추가
         init(view);
@@ -173,15 +159,10 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 stopTapped(null);
-                saveWalkInfo();
             }
         });
 
-
     }
-
-
-
 
     public void startLocationService() {
 
@@ -388,7 +369,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
             LatLng pos1 = this.myLatLng.get(0);
             LatLng pos2 = this.myLatLng.get( this.myLatLng.size() - 1 );
 
-            meters = distance(pos1.latitude, pos1.longitude,
+            double meters = distance(pos1.latitude, pos1.longitude,
                     pos2.latitude, pos2.longitude, 'K');
 //            meters = (double)Math.round((meters*10)/10);
 
@@ -434,9 +415,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                     public void run()
                     {
                         time++;
-                        walkTime = getTimerText();
                         timerText.setText(getTimerText());
-                        //Log.d("tlrksdjl", walkTime);
                     }
                 });
             }
@@ -627,57 +606,6 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
     //카메라 끝
 
-    // 산책 정보 서버로 전송
-    private void saveWalkInfo() {
-        String url = "http://220.71.97.178:8082/dangbody/WalkService";
 
-        distance=String.format("%.1f", meters);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        //Date 객체 사용
-        Date date = new Date();
-        currentDay = simpleDateFormat.format(date);
-        Log.d("산책정보", currentDay);
-        Log.d("산책정보", distance);
-        Log.d("산책정보", walkTime);
-
-        request = new StringRequest(
-                Request.Method.POST,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //Log.d("Test", response);
-
-                        if(response.equals("0")){
-                            Toast.makeText(getActivity(), "저장 실패", Toast.LENGTH_SHORT).show();
-
-                        }else{
-                            Log.d("응답",response);
-                            Toast.makeText(getActivity(), "저장 성공", Toast.LENGTH_SHORT).show();
-
-                            Log.d("확인","저장 성공완");
-
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> param = new HashMap<>();
-                param.put("walk_date",currentDay);
-                param.put("walk_time", walkTime);
-                param.put("walk_distance",distance);
-                return param;
-            }
-        };
-        requestQueue.add(request);
-    }
 
 }

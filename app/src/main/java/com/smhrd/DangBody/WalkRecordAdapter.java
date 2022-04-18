@@ -1,28 +1,74 @@
 package com.smhrd.DangBody;
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class WalkRecordAdapter {
+import java.util.ArrayList;
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+public class WalkRecordAdapter extends RecyclerView.Adapter<WalkRecordAdapter.ViewHolder> {
+    ArrayList<WalkRecord> items = new ArrayList<WalkRecord>();
 
-        TextView textView;
-        TextView textView2;
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        View itemView = inflater.inflate(R.layout.activity_walk_records, viewGroup, false);
+
+        return new ViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        WalkRecord item = items.get(position);
+        viewHolder.setItem(item);
+    }
+
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+
+    public void addItem(WalkRecord item) {
+        items.add(item);
+    }
+
+    public void setItems(ArrayList<WalkRecord> items) {
+        this.items = items;
+    }
+
+    public WalkRecord getItem(int position) {
+        return items.get(position);
+    }
+
+    public void setItem(int position, WalkRecord item) {
+        items.set(position, item);
+    }
 
 
-        public ViewHolder(@NonNull View itemView) {
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView date, time, meters;
+
+
+        public ViewHolder(View itemView) {
             super(itemView);
 
-            textView = itemView.findViewById(R.id.textView);
-//            textView2 = itemView.findViewById(R.id.textView2);
-
-
-
+            date = itemView.findViewById(R.id.textView);
+            time = itemView.findViewById(R.id.time);
+            meters = itemView.findViewById(R.id.meters);
         }
+
+        public void setItem(WalkRecord item) {
+            date.setText(item.getDate());
+            time.setText(item.getTime());
+            meters.setText(item.getMeters());
+        }
+
     }
 
 }
