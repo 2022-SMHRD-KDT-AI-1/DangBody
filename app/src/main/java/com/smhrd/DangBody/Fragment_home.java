@@ -14,14 +14,18 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.smhrd.DangBody.MyPage;
+
+import java.util.Random;
 
 
 public class Fragment_home extends Fragment {
 
     ImageView img_dangBody, img_myPage;
-    Button btn_dangbodyCamera, btn_dangbodyGallery;
+    Button btn_dangbodyCamera, btn_dangbodyGallery, btn_testLogin;
+    TextView tv_dangbodyInfo;
 
 
     public Fragment_home() { }
@@ -39,8 +43,30 @@ public class Fragment_home extends Fragment {
         btn_dangbodyCamera=view.findViewById(R.id.btn_dangbodyCamera);
         btn_dangbodyGallery=view.findViewById(R.id.btn_dangbodyGallery);
 
+
         // 댕바디 이미지 띄워주기
         img_dangBody.setImageResource(R.drawable.img_dangbody);
+
+        // 댕바디 테스트용 로그인 띄워주기
+        btn_testLogin=view.findViewById(R.id.btn_testLogin);
+        btn_testLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(getActivity(), LoginActivity.class);
+                startActivity(i);
+            }
+        });
+
+        // 댕바디 정보 띄워주기
+        tv_dangbodyInfo=view.findViewById(R.id.tv_dangbodyInfo);
+
+        String[]randomTxt = getResources().getStringArray(R.array.randomTxt);
+        Random random = new Random();
+        int n = random.nextInt(randomTxt.length - 1);
+
+        tv_dangbodyInfo.setText(randomTxt[n]);
+
 
 
 
@@ -88,9 +114,13 @@ public class Fragment_home extends Fragment {
 
 
 
+
         return view;
 
 
 
     }
+
+
+
 }

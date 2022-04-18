@@ -1,6 +1,7 @@
 package com.smhrd.DangBody;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
@@ -50,7 +52,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,6 +82,14 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     Double time = 0.0;
     Button btnWr;
 
+    // 서버 전송용 변수
+    String walkTime, distance, currentDay;
+
+    RequestQueue requestQueue;
+    StringRequest request;
+
+    SharedPreferences sp;
+
     //추가 (카메라)
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final String TAG = "카메라";
@@ -98,15 +107,14 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         MapView mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         //추가
-        textView = view.findViewById(R.id.date);
+        textView = view.findViewById(R.id.textView);
         timerText = view.findViewById(R.id.timerText);
         btnStart = view.findViewById(R.id.btnStart);
         btnPause = view.findViewById(R.id.btnPause);
         btnCamera = view.findViewById(R.id.btnCamera);
         distanceText = view.findViewById(R.id.distanceText);
         locationSource = new FusedLocationSource(getActivity(), LOCATION_PERMISSION_REQUEST_CODE);
-        //일지
-        btnWr = view.findViewById(R.id.btnWr);
+
         //카메라 메소드 추가
         init(view);
         btnCamera.setOnClickListener(new View.OnClickListener() {
@@ -116,15 +124,6 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        // 일지로출발~
-        btnWr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), WalkRecordActivity.class);
-
-                startActivity(intent);
-            }
-        });
 
         mapView.getMapAsync(this);
 
@@ -158,7 +157,6 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
             public void onClick(View v) {
                 stopTapped(null);
             }
-
         });
 
     }
@@ -604,40 +602,6 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     }
 
     //카메라 끝
-
-    //화면캡쳐~
-//    public void screenshot(View view)throws Exception {
-//
-//        view.setDrawingCacheEnabled(true);
-//
-//        Bitmap screenshot = view.getDrawingCache();
-//
-//        String filename = "screenshot.png";
-//
-//        try {
-//
-//            File f = new File(Environment.getExternalStorageDirectory(), filename);
-//
-//            f.createNewFile();
-//
-//            OutputStream outStream = new FileOutputStream(f);
-//
-//            screenshot.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-//
-//            outStream.close();
-//
-//        } catch (IOException e) {
-//
-//            e.printStackTrace();
-//
-//        }
-//
-//        view.setDrawingCacheEnabled(false);
-//
-//    }
-
-
-
 
 
 
