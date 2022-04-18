@@ -4,10 +4,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,20 +33,33 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin, btnJoin;
     RequestQueue requestQueue;
     StringRequest request;
+    CheckBox checkBox;
+    boolean saveLoginData;
 
+    SharedPreferences loginData;
+
+    String id,pw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        loginData= getSharedPreferences("loginData", MODE_PRIVATE);
+        load();
+
         init();
 
 
+        if(saveLoginData){
+            edtId.setText(id);
+            edtPw.setText(pw);
+            checkBox.setChecked(saveLoginData);
+        }
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String id = edtId.getText().toString();
-                String pw = edtPw.getText().toString();
+                id = edtId.getText().toString();
+                pw = edtPw.getText().toString();
 
                 String url = "http://220.71.97.178:8082/dangbody/LoginService";
                 //Log.d("확인","클릭완");
@@ -72,12 +87,11 @@ public class LoginActivity extends AppCompatActivity {
 
                                         String userId = obj.getString("user_id");
                                         String userNick = obj.getString("user_nick");
-
+                                        String userPw = obj.getString("user_pw");
                                         Log.d("사용자",userId+"/"+userNick);
 
+                                        save(userId,userPw);
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                        intent.putExtra("user_nick",userNick);
-
                                         startActivity(intent);
 
                                     } catch (JSONException e) {
@@ -115,11 +129,28 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void save(String userId, String userPw){
+        SharedPreferences.Editor editor = loginData.edit();
+
+        editor.putBoolean("SAVE_LOGIN_DATA", checkBox.isChecked());
+        editor.putString("user_id",userId);
+        editor.putString("user_pw",userPw);
+
+        editor.commit();
+    }
+
+    private void load(){
+
+    saveLoginData = loginData.getBoolean("SAVE_LOGIN_DATA",false);
+    id = loginData.getString("user_id","");
+    pw = loginData.getString("user_pw","");
+    }
+
     // xml view 초기화
     private void init() {
         edtId=findViewById(R.id.edtId);
         edtPw=findViewById(R.id.edtPw);
-
+        checkBox = findViewById(R.id.checkBox);
         btnLogin=findViewById(R.id.btnLogin);
         btnJoin=findViewById(R.id.btnJoin);
 
