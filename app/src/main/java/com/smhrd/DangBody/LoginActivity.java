@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                 String id = edtId.getText().toString();
                 String pw = edtPw.getText().toString();
 
-                String url = "http://220.71.97.178:8082/TEST/LoginService";
+                String url = "http://220.71.97.178:8082/dangbody/LoginService";
                 //Log.d("확인","클릭완");
                 request = new StringRequest(
                         Request.Method.POST,
