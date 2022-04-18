@@ -35,4 +35,10 @@
     <string name="btn_gallery">갤러리</string>
     <string name="btn_send">전송</string>
 
+    <string-array name="randomTxt">
+        <item>안녕하세요, 댕바디입니다.</item>
+        <item>댕댕이 비만 여부 확인을 위해 댕바디를 진행해주세요.</item>
+        <item>댕댕이 비만 관리를 위해 활동량을 늘려주세요.</item>
+        <item>댕댕이 비만 관리를 위해 식단을 조절해주세요.</item>
+    </string-array>
 </resources>
