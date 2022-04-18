@@ -22,7 +22,7 @@
             android:text="@string/newEdit"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="30sp"
+            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.127"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,18 +69,20 @@
                 android:id="@+id/userNick"
                 android:layout_width="287dp"
                 android:layout_height="wrap_content"
-
+                android:layout_marginTop="10dp"
                 android:layout_weight="2"
                 android:text="RitoRito"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="37dp"
                 android:layout_height="35dp"
-                app:srcCompat="@drawable/userImg" />
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                app:srcCompat="@drawable/userimg" />
 
 
         </androidx.cardview.widget.CardView>
