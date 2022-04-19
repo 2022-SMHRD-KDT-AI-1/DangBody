@@ -62,61 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 id = edtId.getText().toString();
                 pw = edtPw.getText().toString();
 
-                String url = "http://220.71.97.178:8082/dangbody/LoginService";
-                //Log.d("확인","클릭완");
-                request = new StringRequest(
-                        Request.Method.POST,
-                        url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                //Log.d("Test", response);
-
-                                if(response.equals("0")){
-                                    Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
-                                    //Log.d("확인","로그인실패완");
-                                }else{
-                                    Log.d("응답",response);
-                                    Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
-                                    //Log.d("확인","로그인성공완");
-
-                                    try {
-
-
-
-                                        JSONObject obj = new JSONObject(response);
-
-                                        String userId = obj.getString("user_id");
-                                        String userNick = obj.getString("user_nick");
-                                        String userPw = obj.getString("user_pw");
-                                        Log.d("사용자",userId+"/"+userNick);
-
-                                        save(userId,userPw);
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                        startActivity(intent);
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
-                        }){
-                    @Nullable
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> param = new HashMap<>();
-                        param.put("user_id", id);
-                        param.put("user_pw", pw);
-                        return param;
-                    }
-                };
-                requestQueue.add(request);
+                loginConn();
             }
         });
 
@@ -128,6 +74,112 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void loginConn() {
+        String url = "http://220.71.97.178:8082/dangbody/LoginService";
+        //Log.d("확인","클릭완");
+        request = new StringRequest(
+                Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //Log.d("Test", response);
+
+                        if(response.equals("0")){
+                            Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                            //Log.d("확인","로그인실패완");
+                        }else{
+                            Log.d("응답",response);
+                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+                            //Log.d("확인","로그인성공완");
+
+                            try {
+                                findPet();
+                                JSONObject obj = new JSONObject(response);
+
+                                String userId = obj.getString("user_id");
+                                String userNick = obj.getString("user_nick");
+                                String userPw = obj.getString("user_pw");
+                                Log.d("사용자",userId+"/"+userNick);
+
+                                save(userId,userPw);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param = new HashMap<>();
+                param.put("user_id", id);
+                param.put("user_pw", pw);
+                return param;
+            }
+        };
+        requestQueue.add(request);
+    }
+
+    private void findPet() {
+        String url = "http://220.71.97.178:8082/dangbody/FindPetName";
+        Log.d("확인","이름찾기 시작");
+        request = new StringRequest(
+                Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //Log.d("Test", response);
+
+                        if(response.equals("0")){
+                            Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                            Log.d("확인","이름 찾기 실패");
+                        }else{
+                            Log.d("응답",response);
+                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+                            Log.d("확인","이름 찾기 성공");
+
+                            try {
+                                JSONObject obj = new JSONObject(response);
+
+                                String pn = obj.getString("pet_name");
+
+                                Log.d("확인",pn);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> param = new HashMap<>();
+                param.put("user_id", id);
+                param.put("user_pw", pw);
+                return param;
+            }
+        };
+        requestQueue.add(request);
     }
 
     private void save(String userId, String userPw){
