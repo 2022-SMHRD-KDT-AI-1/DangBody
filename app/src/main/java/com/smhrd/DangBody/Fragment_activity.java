@@ -2,8 +2,10 @@ package com.smhrd.DangBody;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -57,9 +59,11 @@ import com.naver.maps.map.util.FusedLocationSource;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -108,6 +112,8 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     private String currentPhotoPath;
     static final int GET_GALLERY_IMAGE = 2;
 
+    //추가 스크린샷
+    public static final int REQUEST_EXTERNAL_STORAGE = 1;
 
     boolean timerStarted = false;
 
@@ -127,13 +133,13 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         distanceText = view.findViewById(R.id.distanceText);
         btnWr = view.findViewById(R.id.btnWr);
         locationSource = new FusedLocationSource(getActivity(), LOCATION_PERMISSION_REQUEST_CODE);
-        sp = getActivity().getSharedPreferences("user_id",Context.MODE_PRIVATE);
+        sp = getActivity().getSharedPreferences("user_id", Context.MODE_PRIVATE);
 
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         date = new Date();
         currentDay = sdf1.format(date);
 
-        if(requestQueue == null){
+        if (requestQueue == null) {
             requestQueue = Volley.newRequestQueue(getActivity());
         }
         //카메라 메소드 추가
@@ -148,63 +154,83 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         btnPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://220.71.97.178:8082/dangbody/WalkService";
-
                 stopTapped(null);
-                Log.d("Main", "btnPause Clicked" );
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("")
+                        .setMessage("산책 기록을 저장하시겠습니까?")
+                        .setPositiveButton("저장", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String url = "http://220.71.97.178:8082/dangbody/WalkService";
 
-                Toast.makeText(getActivity(),walkTime,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), walkTime, Toast.LENGTH_SHORT).show();
                /* Log.d("넘어가라고!!!!!",walkTime);
                 Log.d("넘어가라고!!!!!",distance);
                 Log.d("넘어가라고!!!!!",currentDay);
                 Log.d("넘어가라고!!!!!",sp.getString("user_id","test"));*/
 
-                request = new StringRequest(
-                        Request.Method.POST,
-                        url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                if(response.equals("0")){
-                                    Toast.makeText(getActivity(), "저장실패", Toast.LENGTH_SHORT).show();
-                                }else{
-                                    Toast.makeText(getActivity(), "저장성공", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
+                                request = new StringRequest(
+                                        Request.Method.POST,
+                                        url,
+                                        new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                if (response.equals("0")) {
+                                                    Toast.makeText(getActivity(), "저장실패", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(getActivity(), "저장성공", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+
+                                            }
+                                        }
+                                ) {
+                                    @Nullable
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        Map<String, String> params = new HashMap<>();
+
+                                        params.put("user_id", sp.getString("user_id", "test"));
+                                        params.put("walk_time", walkTime);
+                                        params.put("walk_distance", distance);
+                                        params.put("walk_date", currentDay);
+
+                                        Log.d("Main", "user_id:" + sp.getString("user_id", "test"));
+                                        Log.d("Main", "walkTime:" + walkTime);
+                                        Log.d("Main", "distance:" + distance);
+                                        Log.d("Main", "currentDay:" + currentDay);
+
+                                        return params;
+                                    }
+                                };
+                                requestQueue.add(request);
+                                takeScreenShot(getView().getRootView(),"result");
 
                             }
-                        }
-                ){
-                    @Nullable
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                        params.put("user_id",sp.getString("user_id","test"));
-                        params.put("walk_time", walkTime);
-                        params.put("walk_distance", distance);
-                        params.put("walk_date",currentDay);
+                            }
+                        });
 
-                        Log.d("Main", "user_id:" + sp.getString("user_id","test"));
-                        Log.d("Main", "walkTime:" + walkTime);
-                        Log.d("Main", "distance:" + distance);
-                        Log.d("Main", "currentDay:" + currentDay);
+                AlertDialog dialog = builder.create();
 
-                        return params;
-                    }
-                };
-                requestQueue.add(request);
+                dialog.show();
+
+
             }
         });
 
         btnWr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),WalkRecordActivity.class);
+                Intent intent = new Intent(getActivity(), WalkRecordActivity.class);
                 startActivity(intent);
             }
         });
@@ -286,8 +312,8 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         List<String> providers = manager.getProviders(true);
         Location bestLocation = null;
         for (String provider : providers) {
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED &&
-                    ActivityCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -321,11 +347,11 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
             Log.d("Main", message);
 
             //카메라 자동이동
-            CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(latitude,longitude));
+            CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(latitude, longitude));
             naverMap.moveCamera(cameraUpdate);
 
 
-            textView.setText( message );
+            textView.setText(message);
             distance = String.format("%.1f", meters);
 //                    거리구하기
 //           Projection projection = naverMap.getProjection();
@@ -334,7 +360,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
             //이거 확인해죠!!!
             //if( MainActivity.this.isWalking == true ) {
-            if( isWalking == true ) {
+            if (isWalking == true) {
                 //10초마다 저장된다.
 
                 //MainActivity.this.myLatLng.add(new LatLng(latitude, longitude));
@@ -343,9 +369,8 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                 displayMeters();
 
 
-
                 //마커세팅
-                if( oldMarker != null )
+                if (oldMarker != null)
                     oldMarker.setMap(null);
 
 
@@ -355,23 +380,24 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                 marker.setWidth(80);
                 marker.setHeight(80);
                 marker.setHideCollidedSymbols(true);
+
                 marker.setMap(naverMap);
                 oldMarker = marker;
 
                 // 경로 그리기
-                if( myLatLng.size() >= 2 ) {
-             //   if( MainActivity.this.myLatLng.size() >= 2 ) {
+                if (myLatLng.size() >= 2) {
+                    //   if( MainActivity.this.myLatLng.size() >= 2 ) {
                     //경로를 다시 그린다.
                     PathOverlay path = new PathOverlay();
                     path.setWidth(20);
                     path.setColor(Color.RED);
                     path.setCoords(
                             (List) myLatLng
-                       //     (List) MainActivity.this.myLatLng
+                            //     (List) MainActivity.this.myLatLng
                     );
                     path.setMap(naverMap);
-                }else{
-                    Log.d("Main","위치정보리스트가 2미만임.");
+                } else {
+                    Log.d("Main", "위치정보리스트가 2미만임.");
                 }
             }
 
@@ -397,7 +423,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     // 위치 권한설정
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,  @NonNull int[] grantResults) {
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (locationSource.onRequestPermissionsResult(
                 requestCode, permissions, grantResults)) {
             if (!locationSource.isActivated()) { // 권한 거부됨
@@ -443,18 +469,17 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     public void displayMeters() {
 
 
-        if( this.myLatLng.size() >= 2 ) {
+        if (this.myLatLng.size() >= 2) {
             LatLng pos1 = this.myLatLng.get(0);
-            LatLng pos2 = this.myLatLng.get( this.myLatLng.size() - 1 );
+            LatLng pos2 = this.myLatLng.get(this.myLatLng.size() - 1);
 
             meters = distance(pos1.latitude, pos1.longitude,
                     pos2.latitude, pos2.longitude, 'K');
 //            meters = (double)Math.round((meters*10)/10);
 
-            Log.d("Main", meters+ " Kilometers\n");
-            distanceText.setText( String.format("%.1f", meters) );
-        }
-        else{
+            Log.d("Main", meters + " Kilometers\n");
+            distanceText.setText(String.format("%.1f", meters));
+        } else {
             Log.d("Main", "displayMeters 2개 이하입니다.");
         }
 
@@ -463,50 +488,43 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     //타이머 메소드 추가
 
 
-    public void startTapped(View view)
-    {
-        if(timerStarted == false)
-        {
+    public void startTapped(View view) {
+        if (timerStarted == false) {
             timerStarted = true;
             startTimer();
         }
 
     }
-    public void stopTapped(View view){
-        if(timerStarted == true){
+
+    public void stopTapped(View view) {
+        if (timerStarted == true) {
             timerStarted = false;
             timerTask.cancel();
         }
     }
 
 
-    private void startTimer()
-    {
-        timerTask = new TimerTask()
-        {
+    private void startTimer() {
+        timerTask = new TimerTask() {
             @Override
-            public void run()
-            {
-                getActivity().runOnUiThread(new Runnable()
-                {
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
                     @Override
-                    public void run()
-                    {
+                    public void run() {
                         time++;
                         timerText.setText(getTimerText());
-                        walkTime=timerText.getText().toString();
+                        walkTime = timerText.getText().toString();
                     }
                 });
             }
 
         };
-        timer.scheduleAtFixedRate(timerTask, 0 ,1000);
+        timer.scheduleAtFixedRate(timerTask, 0, 1000);
     }
 
 
     @NonNull
-    private String getTimerText()
-    {
+    private String getTimerText() {
         int rounded = (int) Math.round(time);
 
         int seconds = ((rounded % 86400) % 3600) % 60;
@@ -517,9 +535,8 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     }
 
     @NonNull
-    private String formatTime(int seconds, int minutes, int hours)
-    {
-        return String.format("%02d",hours) + " : " + String.format("%02d",minutes) + " : " + String.format("%02d",seconds);
+    private String formatTime(int seconds, int minutes, int hours) {
+        return String.format("%02d", hours) + " : " + String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
     }
 
     //타이머 끝
@@ -578,19 +595,19 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     //갤러리 사진 저장 기능
     private void saveFile(String currentPhotoPath) {
 
-        Bitmap bitmap = BitmapFactory.decodeFile( currentPhotoPath );
+        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
 
-        ContentValues values = new ContentValues( );
+        ContentValues values = new ContentValues();
 
         //실제 앨범에 저장될 이미지이름
-        values.put( MediaStore.Images.Media.DISPLAY_NAME, new SimpleDateFormat( "yyyyMMdd_HHmmss", Locale.US ).format( new Date( ) ) + ".jpg" );
-        values.put( MediaStore.Images.Media.MIME_TYPE, "image/*" );
+        values.put(MediaStore.Images.Media.DISPLAY_NAME, new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date()) + ".jpg");
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
 
         //저장될 경로 -> /내장 메모리/DCIM/ 에 'AndroidQ' 폴더로 지정
-        values.put( MediaStore.Images.Media.RELATIVE_PATH, "DCIM/AndroidQ" );
+        values.put(MediaStore.Images.Media.RELATIVE_PATH, "DCIM/AndroidQ");
 
-        Uri u = MediaStore.Images.Media.getContentUri( MediaStore.VOLUME_EXTERNAL );
-        Uri uri = getActivity().getContentResolver( ).insert( u, values ); //이미지 Uri를 MediaStore.Images에 저장
+        Uri u = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL);
+        Uri uri = getActivity().getContentResolver().insert(u, values); //이미지 Uri를 MediaStore.Images에 저장
 
         try {
             /*
@@ -603,43 +620,43 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
             ParcelFileDescriptor parcelFileDescriptor = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                parcelFileDescriptor = getActivity().getContentResolver( ).openFileDescriptor( uri, "w", null ); //미디어 파일 열기
+                parcelFileDescriptor = getActivity().getContentResolver().openFileDescriptor(uri, "w", null); //미디어 파일 열기
             }
-            if ( parcelFileDescriptor == null ) return;
+            if (parcelFileDescriptor == null) return;
 
             //바이트기반스트림을 이용하여 JPEG파일을 바이트단위로 쪼갠 후 저장
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream( );
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
             //비트맵 형태 이미지 크기 압축
-            bitmap.compress( Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream );
-            byte[] b = byteArrayOutputStream.toByteArray( );
-            InputStream inputStream = new ByteArrayInputStream( b );
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] b = byteArrayOutputStream.toByteArray();
+            InputStream inputStream = new ByteArrayInputStream(b);
 
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream( );
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
             int bufferSize = 1024;
-            byte[] buffers = new byte[ bufferSize ];
+            byte[] buffers = new byte[bufferSize];
 
             int len = 0;
-            while ( ( len = inputStream.read( buffers ) ) != -1 ) {
-                buffer.write( buffers, 0, len );
+            while ((len = inputStream.read(buffers)) != -1) {
+                buffer.write(buffers, 0, len);
             }
 
-            byte[] bs = buffer.toByteArray( );
-            FileOutputStream fileOutputStream = new FileOutputStream( parcelFileDescriptor.getFileDescriptor( ) );
-            fileOutputStream.write( bs );
-            fileOutputStream.close( );
-            inputStream.close( );
-            parcelFileDescriptor.close( );
+            byte[] bs = buffer.toByteArray();
+            FileOutputStream fileOutputStream = new FileOutputStream(parcelFileDescriptor.getFileDescriptor());
+            fileOutputStream.write(bs);
+            fileOutputStream.close();
+            inputStream.close();
+            parcelFileDescriptor.close();
 
-            getActivity().getContentResolver( ).update( uri, values, null, null ); //MediaStore.Images 테이블에 이미지 행 추가 후 업데이트
+            getActivity().getContentResolver().update(uri, values, null, null); //MediaStore.Images 테이블에 이미지 행 추가 후 업데이트
 
-        } catch ( Exception e ) {
-            e.printStackTrace( );
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        values.clear( );
-        values.put( MediaStore.Images.Media.IS_PENDING, 0 ); //실행하는 기기에서 앱이 IS_PENDING 값을 1로 설정하면 독점 액세스 권한 획득
-        getActivity().getContentResolver( ).update( uri, values, null, null );
+        values.clear();
+        values.put(MediaStore.Images.Media.IS_PENDING, 0); //실행하는 기기에서 앱이 IS_PENDING 값을 1로 설정하면 독점 액세스 권한 획득
+        getActivity().getContentResolver().update(uri, values, null, null);
 
     }
 
@@ -676,7 +693,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(imageFileName, ".jpg", storageDir);
 
-        Log.d(TAG, "사진저장>> "+storageDir.toString());
+        Log.d(TAG, "사진저장>> " + storageDir.toString());
 
         currentPhotoPath = image.getAbsolutePath();
 
@@ -684,6 +701,44 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     }
 
     //카메라 끝
+
+    //스크린샷 시작
+
+        public static File takeScreenShot(View mapView, String fileName){
+        Date date2 = new Date();
+        CharSequence format = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss").format(new Date());
+
+        try{
+
+            String dirPath = Environment.getExternalStorageDirectory().toString() + "";
+            File fileDir = new File(dirPath);
+            if(!fileDir.exists()){
+                boolean mkdir = fileDir.mkdir();
+            }
+
+            String path = dirPath + "/" + fileName + "-" + format + ".jpeg";
+
+            mapView.setDrawingCacheEnabled(true);
+            Bitmap bitmap = Bitmap.createBitmap(mapView.getDrawingCache());
+            mapView.setDrawingCacheEnabled(false);
+
+            File imageFile = new File(path);
+
+            FileOutputStream fileOutputStream = new FileOutputStream(imageFile);
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    // 스크린샷 끝
 
 
 

@@ -41,26 +41,17 @@ public class WalkRecordActivity extends AppCompatActivity {
         //로그인 정보
         loginData = getSharedPreferences("loginData",MODE_PRIVATE);
 
-        time = findViewById(R.id.time);
-        meters = findViewById(R.id.meters);
-        date = findViewById(R.id.textView);
+//        time = findViewById(R.id.time);
+//        meters = findViewById(R.id.meters);
+//        date = findViewById(R.id.textView);
 
 
         userID = loginData.getString("user_id","없음");
 
-
         RecyclerView rvWalkRecord = findViewById(R.id.rvWalkRecord);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false );
-        rvWalkRecord.setLayoutManager(layoutManager);
-
         WalkRecordAdapter adapter = new WalkRecordAdapter();
-
 //        adapter.addItem(new WalkRecord("123","123","123"));
 //        adapter.addItem(new WalkRecord("456","456","456"));
-//
-//
-//
 //        rvWalkRecord.setAdapter(adapter);
 
         if(queue == null){
@@ -97,11 +88,22 @@ public class WalkRecordActivity extends AppCompatActivity {
                                 sb.append(walk_date);
                                 sb.append("\n");
 
+                                Log.d("main","walk_time" + walk_time);
+                                Log.d("main","walk_time" + walk_date);
+                                Log.d("main","walk_time" + walk_distance);
 
+                                adapter.addItem(new WalkRecord(walk_time,walk_distance,walk_date));
                             }//end for
-                            time.setText(sb.toString());
-                            meters.setText(sb.toString());
-                            date.setText(sb.toString());
+//                            time.setText(sb.toString());
+//                            meters.setText(sb.toString());
+//                            date.setText(sb.toString());
+
+//                            adapter.addItem(new WalkRecord("456","456","456"));
+//                            adapter.addItem(new WalkRecord("454","454","454"));
+
+                            LinearLayoutManager layoutManager = new LinearLayoutManager(WalkRecordActivity.this,LinearLayoutManager.VERTICAL,false );
+                            rvWalkRecord.setLayoutManager(layoutManager);
+                            rvWalkRecord.setAdapter(adapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -127,15 +129,6 @@ public class WalkRecordActivity extends AppCompatActivity {
 
         // 서버요청하기
         queue.add(request);
-
-
-        adapter.addItem(new WalkRecord(walk_time,walk_distance,walk_date));
-        adapter.addItem(new WalkRecord("456","456","456"));
-
-
-
-        rvWalkRecord.setAdapter(adapter);
-
     }
 
 

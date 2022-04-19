@@ -26,12 +26,12 @@
     <string name="userPhone">전화번호 입력</string>
 
     <!--    frament_record.xml-->
-    <string name="btnWeekly">할 일 추가</string>
+    <string name="btnWeekly">Weekly</string>
     <string name="btnPrevMonth">◀</string>
     <string name="btnNextMonth">▶</string>
 
     <!--activity_camera-->
-    <string name= "btn_capture">캡쳐</string>
+    <string name="btn_capture">캡쳐</string>
     <string name="btn_gallery">갤러리</string>
     <string name="btn_send">전송</string>
 
