@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
     SharedPreferences loginData;
 
-    String id,pw;
+    String id,pw, petName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putBoolean("SAVE_LOGIN_DATA", checkBox.isChecked());
         editor.putString("user_id",userId);
         editor.putString("user_pw",userPw);
+        editor.putString("pet_name",petName);
 
         editor.commit();
     }
@@ -153,7 +154,7 @@ public class LoginActivity extends AppCompatActivity {
         checkBox = findViewById(R.id.checkBox);
         btnLogin=findViewById(R.id.btnLogin);
         btnJoin=findViewById(R.id.btnJoin);
-
+        petName = "bean";
         if(requestQueue == null){
             requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
