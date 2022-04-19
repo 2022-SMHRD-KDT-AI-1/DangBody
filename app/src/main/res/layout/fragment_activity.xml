@@ -18,9 +18,9 @@
             android:id="@+id/btnCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
             android:src="@android:drawable/ic_menu_camera"
             app:layout_constraintBottom_toBottomOf="@+id/btnPause"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnPause"
             app:layout_constraintTop_toTopOf="@+id/btnPause"
             app:layout_constraintVertical_bias="1.0" />
@@ -29,9 +29,9 @@
             android:id="@+id/btnStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
             android:src="@android:drawable/ic_media_play"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnPause"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.644" />
@@ -40,9 +40,9 @@
             android:id="@+id/btnPause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
             android:src="@android:drawable/ic_media_pause"
             app:layout_constraintBottom_toBottomOf="@+id/btnStart"
+            app:layout_constraintEnd_toStartOf="@+id/btnCamera"
             app:layout_constraintStart_toEndOf="@+id/btnStart"
             app:layout_constraintTop_toTopOf="@+id/btnStart"
             app:layout_constraintVertical_bias="1.0" />

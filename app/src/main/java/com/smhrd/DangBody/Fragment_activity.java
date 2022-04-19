@@ -51,6 +51,7 @@ import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.overlay.PathOverlay;
@@ -251,6 +252,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 //
 //        uiSettings.setLocationButtonEnabled(true);
 //
+//
 //        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
         //타이머 추가코드
@@ -302,6 +304,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
         } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_SHORT).show();
         }
 
         Toast.makeText(getActivity(), "GPS좌표 요청함.", Toast.LENGTH_LONG).show();
@@ -321,7 +324,6 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
-
             }
             Location l = manager.getLastKnownLocation(provider);
             if (l == null) {
@@ -343,13 +345,14 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
 
+            Toast.makeText(getActivity(), "GPS실행!", Toast.LENGTH_SHORT).show();
+
             String message = "내 위치 -> Lat:" + latitude + ", Lon:" + longitude;
-            Log.d("Main", message);
+            Log.d("Fragment_activity", message);
 
             //카메라 자동이동
             CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(latitude, longitude));
             naverMap.moveCamera(cameraUpdate);
-
 
             textView.setText(message);
             distance = String.format("%.1f", meters);
@@ -508,6 +511,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         timerTask = new TimerTask() {
             @Override
             public void run() {
+
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -704,7 +708,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
     //스크린샷 시작
 
-        public static File takeScreenShot(View mapView, String fileName){
+    public static File takeScreenShot(View mapView, String fileName){
         Date date2 = new Date();
         CharSequence format = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss").format(new Date());
 
