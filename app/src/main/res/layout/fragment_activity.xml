@@ -55,9 +55,10 @@
             android:text="내위치 :"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintHorizontal_bias="0.158"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnStart" />
+            app:layout_constraintTop_toBottomOf="@+id/btnStart"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/timerText"
@@ -65,7 +66,7 @@
             android:layout_height="wrap_content"
             android:background="#EA1212"
             android:text="00:00:00"
-            app:layout_constraintBottom_toTopOf="@+id/btnPause"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -79,8 +80,10 @@
             android:text="0.0"
             app:layout_constraintBottom_toTopOf="@+id/btnCamera"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.518"
             app:layout_constraintStart_toEndOf="@+id/timerText"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/btnWr"
