@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences loginData;
 
     String id,pw;
+    String petName = "bean";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putBoolean("SAVE_LOGIN_DATA", checkBox.isChecked());
         editor.putString("user_id",userId);
         editor.putString("user_pw",userPw);
+        editor.putString("pet_name",petName);
 
         editor.commit();
     }
@@ -144,6 +146,7 @@ public class LoginActivity extends AppCompatActivity {
     saveLoginData = loginData.getBoolean("SAVE_LOGIN_DATA",false);
     id = loginData.getString("user_id","");
     pw = loginData.getString("user_pw","");
+    petName = loginData.getString("pet_name","이름없음2");
     }
 
     // xml view 초기화

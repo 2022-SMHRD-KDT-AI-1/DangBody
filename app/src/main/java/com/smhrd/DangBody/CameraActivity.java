@@ -9,6 +9,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -63,6 +64,8 @@ public class CameraActivity extends AppCompatActivity {
 
     static final String TAG = "카메라";
     private String imageString;
+    SharedPreferences sp;
+    String pet_name, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,10 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
 
         init();
+        sp = getSharedPreferences("loginData",MODE_PRIVATE);
+        pet_name=sp.getString("pet_name","이름없음");
+        id=sp.getString("user_id","사람이름");
+
 
         btn_capture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,9 +142,9 @@ public class CameraActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
 
                 //강아지이름, 이미지 전달
-
+                params.put("user_id",id);
                 params.put("image", imageString);
-
+                params.put("pet_name",pet_name);
                 return params;
             }
         };
