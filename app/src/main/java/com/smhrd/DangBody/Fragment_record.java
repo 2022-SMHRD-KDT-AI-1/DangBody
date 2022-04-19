@@ -16,7 +16,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,6 +34,8 @@ public class Fragment_record extends Fragment {
     RecyclerView calendarRecyclerView;
     Button btnWeekly, btnPrevMonth, btnNextMonth;
     View view;
+//    CheckBox checkbox_todo;
+//    boolean check=false;
 
 //    @RequiresApi(api = Build.VERSION_CODES.O)
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -43,10 +48,35 @@ public class Fragment_record extends Fragment {
         btnWeekly = view.findViewById(R.id.btnWeekly);
         btnPrevMonth = view.findViewById(R.id.btnPrevMonth);
         btnNextMonth = view.findViewById(R.id.btnNextMonth);
+        //체크박스
+//        checkbox_todo = view.findViewById(R.id.checkbox_todo);
+//        if (checkbox_todo.isChecked()) {
+//            // TODO : CheckBox is checked.
+//            Toast.makeText(getActivity(), "체크된당!!!", Toast.LENGTH_LONG).show();
+//        } else {
+//            // TODO : CheckBox is unchecked.
+//        }
+//
+//        checkbox_todo.setChecked(true) ;
 
         initWidgets();
         CalendarUtils.selectedDate = LocalDate.now();
         setMonthView();
+
+//
+//        checkbox_todo.setOnClickListener(new CheckBox.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (((CheckBox)v).isChecked()) {
+//                    // TODO : CheckBox is checked.
+//                    check = true;
+//                } else {
+//                    // TODO : CheckBox is unchecked.
+//                    check=false;
+//                }
+//            }
+//        }) ;
+
 
         // 작은 양의 데이터를 저장할 때 사용하는 객체
         // 객체를 통해 데이터를 저장 > 파일 형태로 안드로이드에 저장
@@ -55,6 +85,7 @@ public class Fragment_record extends Fragment {
         // context.MODE_PRIVATE : 외부에서 파일 접근 금지 권한
 //        SharedPreferences spf = getActivity().getSharedPreferences("mySDF", Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = spf.edit();
+
         btnWeekly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +107,10 @@ public class Fragment_record extends Fragment {
             }
         });
 
+
         return view;
+
+
     }
 
     private void initWidgets() {
@@ -126,6 +160,15 @@ public class Fragment_record extends Fragment {
     public void weeklyAction(View view)
     {
         startActivity(new Intent(getActivity(), WeekViewActivity.class));
+    }
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+
+        // Check which checkbox was clicked
+
     }
 }
 //

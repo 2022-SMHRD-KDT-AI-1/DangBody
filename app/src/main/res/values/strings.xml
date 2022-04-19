@@ -26,7 +26,7 @@
     <string name="userPhone">전화번호 입력</string>
 
     <!--    frament_record.xml-->
-    <string name="btnWeekly">할 일 추가</string>
+    <string name="btnWeekly">Weekly</string>
     <string name="btnPrevMonth">◀</string>
     <string name="btnNextMonth">▶</string>
 
@@ -41,6 +41,6 @@
         <item>댕댕이 비만 관리를 위해 활동량을 늘려주세요.</item>
         <item>댕댕이 비만 관리를 위해 식단을 조절해주세요.</item>
     </string-array>
-    <!--activity_write.xml-->
+<!--activity_write.xml-->
     <string name="newEdit">새 게시물</string>
 </resources>
