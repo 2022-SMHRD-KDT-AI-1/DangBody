@@ -1,6 +1,9 @@
 package com.smhrd.DangBody;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,9 +26,7 @@ public class WriteActivity extends AppCompatActivity {
     EditText contentsInput;
     private ImageView imageView;
     private Button saveButton;
-
-
-
+   Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +40,29 @@ public class WriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(WriteActivity.this,CameraActivity.class);
-
                 startActivity(intent);
             }
         });
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(WriteActivity.this, );
 
-                Intent intent = new Intent(WriteActivity.this,Fragment_community.class);
-                startActivity(intent);
+                finish();
+
+                //Intent intent = new Intent(WriteActivity.this,Fragment_community.class);
+                //startActivity(intent);
             }
         });
   }
-}
+
+
+
+//    private void replaceFragment(Fragment fragment) {
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.rcv,fragment);
+//        fragmentTransaction.commit();
+    }
+
