@@ -41,6 +41,6 @@
         <item>댕댕이 비만 관리를 위해 활동량을 늘려주세요.</item>
         <item>댕댕이 비만 관리를 위해 식단을 조절해주세요.</item>
     </string-array>
-
+<!--activity_write.xml-->
     <string name="newEdit">새 게시물</string>
 </resources>
