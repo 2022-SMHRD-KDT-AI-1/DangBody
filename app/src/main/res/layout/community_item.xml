@@ -26,6 +26,7 @@
         android:id="@+id/tvNick"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_gravity="right"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
         app:layout_constraintEnd_toEndOf="parent"

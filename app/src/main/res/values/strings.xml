@@ -14,8 +14,8 @@
     <!--activity_login.xml-->
     <string name="userId">ID 입력</string>
     <string name="userPw">PW 입력</string>
-    <string name="btnLogin">Login</string>
-    <string name="btnJoin">Join</string>
+    <string name="btnLogin">로그인</string>
+    <string name="btnJoin">가입하기</string>
 
 
     <!--activity_join.xml-->

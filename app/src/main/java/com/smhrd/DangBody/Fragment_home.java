@@ -47,7 +47,7 @@ public class Fragment_home extends Fragment {
         // 댕바디 이미지 띄워주기
         img_dangBody.setImageResource(R.drawable.img_dangbody);
 
-        // 댕바디 테스트용 로그인 띄워주기
+//         댕바디 테스트용 로그인 띄워주기
         btn_testLogin=view.findViewById(R.id.btn_testLogin);
         btn_testLogin.setOnClickListener(new View.OnClickListener() {
             @Override
