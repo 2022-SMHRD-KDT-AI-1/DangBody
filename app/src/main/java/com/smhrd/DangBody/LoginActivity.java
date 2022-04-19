@@ -38,7 +38,8 @@ public class LoginActivity extends AppCompatActivity {
 
     SharedPreferences loginData;
 
-    String id,pw, petName;
+    String id,pw;
+    String petName = "bean";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,6 +146,7 @@ public class LoginActivity extends AppCompatActivity {
     saveLoginData = loginData.getBoolean("SAVE_LOGIN_DATA",false);
     id = loginData.getString("user_id","");
     pw = loginData.getString("user_pw","");
+    petName = loginData.getString("pet_name","이름없음2");
     }
 
     // xml view 초기화
@@ -154,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
         checkBox = findViewById(R.id.checkBox);
         btnLogin=findViewById(R.id.btnLogin);
         btnJoin=findViewById(R.id.btnJoin);
-        petName = "bean";
+
         if(requestQueue == null){
             requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
