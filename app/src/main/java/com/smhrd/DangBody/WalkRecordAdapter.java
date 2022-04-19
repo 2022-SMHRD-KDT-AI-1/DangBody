@@ -25,7 +25,10 @@ public class WalkRecordAdapter extends RecyclerView.Adapter<WalkRecordAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         WalkRecord item = items.get(position);
-        viewHolder.setItem(item);
+
+        viewHolder.date.setText(item.getDate());
+        viewHolder.time.setText(item.getTime());
+        viewHolder.meters.setText(item.getMeters());
     }
 
     @Override
@@ -54,21 +57,14 @@ public class WalkRecordAdapter extends RecyclerView.Adapter<WalkRecordAdapter.Vi
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView date, time, meters;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
 
             date = itemView.findViewById(R.id.textView);
             time = itemView.findViewById(R.id.time);
             meters = itemView.findViewById(R.id.meters);
-        }
 
-        public void setItem(WalkRecord item) {
-            date.setText(item.getDate());
-            time.setText(item.getTime());
-            meters.setText(item.getMeters());
         }
-
     }
 
 }
