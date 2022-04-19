@@ -35,8 +35,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
@@ -58,8 +63,10 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -73,6 +80,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     private FusedLocationSource locationSource;
     LocationManager manager;
 
+    double meters;
     TextView textView, timerText, distanceText;
     ImageButton btnStart, btnPause, btnCamera;
     ArrayList<LatLng> myLatLng = new ArrayList<>();
@@ -90,6 +98,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
     RequestQueue requestQueue;
     StringRequest request;
+    Date date;
 
     SharedPreferences sp;
 
@@ -116,14 +125,87 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         btnPause = view.findViewById(R.id.btnPause);
         btnCamera = view.findViewById(R.id.btnCamera);
         distanceText = view.findViewById(R.id.distanceText);
+        btnWr = view.findViewById(R.id.btnWr);
         locationSource = new FusedLocationSource(getActivity(), LOCATION_PERMISSION_REQUEST_CODE);
+        sp = getActivity().getSharedPreferences("user_id",Context.MODE_PRIVATE);
 
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        date = new Date();
+        currentDay = sdf1.format(date);
+
+        if(requestQueue == null){
+            requestQueue = Volley.newRequestQueue(getActivity());
+        }
         //카메라 메소드 추가
         init(view);
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 camera_open_intent();
+            }
+        });
+
+        btnPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "http://220.71.97.178:8082/dangbody/WalkService";
+
+                stopTapped(null);
+                Log.d("Main", "btnPause Clicked" );
+
+                Toast.makeText(getActivity(),walkTime,Toast.LENGTH_SHORT).show();
+               /* Log.d("넘어가라고!!!!!",walkTime);
+                Log.d("넘어가라고!!!!!",distance);
+                Log.d("넘어가라고!!!!!",currentDay);
+                Log.d("넘어가라고!!!!!",sp.getString("user_id","test"));*/
+
+                request = new StringRequest(
+                        Request.Method.POST,
+                        url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if(response.equals("0")){
+                                    Toast.makeText(getActivity(), "저장실패", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(getActivity(), "저장성공", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        }
+                ){
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+
+                        params.put("user_id",sp.getString("user_id","test"));
+                        params.put("walk_time", walkTime);
+                        params.put("walk_distance", distance);
+                        params.put("walk_date",currentDay);
+
+                        Log.d("Main", "user_id:" + sp.getString("user_id","test"));
+                        Log.d("Main", "walkTime:" + walkTime);
+                        Log.d("Main", "distance:" + distance);
+                        Log.d("Main", "currentDay:" + currentDay);
+
+                        return params;
+                    }
+                };
+                requestQueue.add(request);
+            }
+        });
+
+        btnWr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),WalkRecordActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -155,12 +237,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                 startTapped(null);
             }
         });
-        btnPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopTapped(null);
-            }
-        });
+
 
     }
 
@@ -249,6 +326,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
 
             textView.setText( message );
+            distance = String.format("%.1f", meters);
 //                    거리구하기
 //           Projection projection = naverMap.getProjection();
 //            double distance = projection.getDistance(latitude,longitude);
@@ -369,7 +447,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
             LatLng pos1 = this.myLatLng.get(0);
             LatLng pos2 = this.myLatLng.get( this.myLatLng.size() - 1 );
 
-            double meters = distance(pos1.latitude, pos1.longitude,
+            meters = distance(pos1.latitude, pos1.longitude,
                     pos2.latitude, pos2.longitude, 'K');
 //            meters = (double)Math.round((meters*10)/10);
 
@@ -416,6 +494,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                     {
                         time++;
                         timerText.setText(getTimerText());
+                        walkTime=timerText.getText().toString();
                     }
                 });
             }
@@ -581,7 +660,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
             if (photoFile != null) {
                 //uriToSend = FileProvider.getUriForFile(ctx, "com.mycompany.myfirstapp.fileprovider", f);
-                Uri providerURI = FileProvider.getUriForFile(getActivity(), "com.example.NaverMap.fileprovider", photoFile);
+                Uri providerURI = FileProvider.getUriForFile(getActivity(), "com.example.DangBody.fileprovider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, providerURI);
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
