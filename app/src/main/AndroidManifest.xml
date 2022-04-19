@@ -28,7 +28,7 @@
             android:exported="false" />
         <activity
             android:name=".JoinPetActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".WriteActivity"
             android:exported="false" />
@@ -60,7 +60,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Ex220322" />
+            android:theme="@style/Theme.Ex220322"
+            />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"

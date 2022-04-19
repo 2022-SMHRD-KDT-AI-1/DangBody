@@ -31,7 +31,7 @@ public class JoinPetActivity extends AppCompatActivity {
     /* Pet 등록 */
 
     TextView edtPetName, edtPetWeight;
-    Button btnJoinPet;
+    Button btnJoinPet, btn_toHome;
     RadioButton genderFemale, genderMale, neutralYes, neutralNo;
     Spinner spinnerPetBirthYear, spinnerPetBirthMonth, spinnerPetBirthDay, spinnerPetYear, spinnerPetMonth, spinnerPetDay;
     String petGender;
@@ -52,6 +52,16 @@ public class JoinPetActivity extends AppCompatActivity {
         init();
 
         spinner();
+
+//        회원가입 후 반려견 추가 등록 원치 않을시 홈으로 바로 이동
+        btn_toHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(JoinPetActivity.this, Fragment_home.class);
+                startActivity(intent);
+            }
+        });
+
 
         btnJoinPet.setOnClickListener(new View.OnClickListener() {
             @Override
