@@ -43,4 +43,5 @@
     </string-array>
 <!--activity_write.xml-->
     <string name="newEdit">새 게시물</string>
+    <string name="checkbox_todo"></string>
 </resources>
