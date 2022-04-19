@@ -17,10 +17,12 @@ import androidx.annotation.RequiresApi;
 
 import java.util.List;
 
+
+
 public class EventAdapter extends ArrayAdapter<com.smhrd.DangBody.Event>
 {
-//    CheckBox checkbox_todo;
-//    View view;
+    CheckBox checkbox_todo;
+    View view;
 
 
     public EventAdapter(@NonNull Context context, List<com.smhrd.DangBody.Event> events)
@@ -36,30 +38,45 @@ public class EventAdapter extends ArrayAdapter<com.smhrd.DangBody.Event>
     {
         com.smhrd.DangBody.Event event = getItem(position);
 
+
+
         if (convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.event_cell, parent, false);
 
-        TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
+            TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
 
-        String eventTitle = event.getName() +" "+ CalendarUtils.formattedTime(event.getTime());
-        eventCellTV.setText(eventTitle);
-        
+            String eventTitle = event.getName() +" "+ CalendarUtils.formattedTime(event.getTime());
+            eventCellTV.setText(eventTitle);
+
 //        체크박스
-//        checkbox_todo = view.findViewById(R.id.checkbox_todo);
-//
-//                if (checkbox_todo.isChecked()) {
-//            // TODO : CheckBox is checked.
-//            Toast.makeText(getContext(), "체크된당!!!", Toast.LENGTH_LONG).show();
-//        } else {
-//            // TODO : CheckBox is unchecked.
-//        }
+        checkbox_todo = convertView.findViewById(R.id.checkbox_todo);
+        checkbox_todo.setChecked(false);
+        checkbox_todo.setOnClickListener(new View.OnClickListener() {
 
-//        checkbox_todo.setChecked(true) ;;
+            @Override
+            public void onClick(View v) {
+                onCheckboxClicked(view);
+            }
+        });
 
 
 
         return convertView;
+    }
+
+    public void onCheckboxClicked(View view){
+        if (checkbox_todo.isChecked()) {
+            // TODO : CheckBox is checked.
+            Toast.makeText(getContext(), "체크된당!!!", Toast.LENGTH_LONG).show();
+            checkbox_todo.setChecked(true);
+        } else {
+            // TODO : CheckBox is unchecked.
+            checkbox_todo.setChecked(false);
+        }
+
 
 
     }
+
 }
+

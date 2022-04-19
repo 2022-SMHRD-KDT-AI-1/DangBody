@@ -34,8 +34,8 @@ public class Fragment_record extends Fragment {
     RecyclerView calendarRecyclerView;
     Button btnWeekly, btnPrevMonth, btnNextMonth;
     View view;
-//    CheckBox checkbox_todo;
-//    boolean check=false;
+    CheckBox checkbox_todo;
+    boolean check= false;
 
 //    @RequiresApi(api = Build.VERSION_CODES.O)
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -49,7 +49,16 @@ public class Fragment_record extends Fragment {
         btnPrevMonth = view.findViewById(R.id.btnPrevMonth);
         btnNextMonth = view.findViewById(R.id.btnNextMonth);
         //체크박스
-//        checkbox_todo = view.findViewById(R.id.checkbox_todo);
+        checkbox_todo = view.findViewById(R.id.checkbox_todo);
+
+
+//        checkbox_todo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onCheckboxClicked(v);
+//            }
+//        });
+
 //        if (checkbox_todo.isChecked()) {
 //            // TODO : CheckBox is checked.
 //            Toast.makeText(getActivity(), "체크된당!!!", Toast.LENGTH_LONG).show();
@@ -162,13 +171,16 @@ public class Fragment_record extends Fragment {
         startActivity(new Intent(getActivity(), WeekViewActivity.class));
     }
 
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-
-
-        // Check which checkbox was clicked
-
-    }
+//    public void onCheckboxClicked(View view){
+//        if (checkbox_todo.isChecked()) {
+//            // TODO : CheckBox is checked.
+//            Toast.makeText(getContext(), "체크된당!!!", Toast.LENGTH_LONG).show();
+//        } else {
+//            // TODO : CheckBox is unchecked.
+//        }
+//
+//
+//        checkbox_todo.setChecked(true);
+//    }
 }
 //
