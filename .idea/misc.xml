@@ -13,14 +13,19 @@
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/drawable/indicator.xml" value="0.251" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/drawable/menu_selector_color.xml" value="0.118" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/drawable/roundcornerrec.xml" value="0.1505" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/drawable/select_button.xml" value="0.1505" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/drawable/splash_background.xml" value="0.1" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_camera.xml" value="0.2791666666666667" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_event_edit.xml" value="0.2563405797101449" />
-        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_join.xml" value="0.33" />
-        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_login.xml" value="0.2916666666666667" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_join.xml" value="0.25" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_join_pet.xml" value="0.33" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_main.xml" value="0.24074074074074073" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_my_page.xml" value="0.24074074074074073" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_splash.xml" value="0.24074074074074073" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_walk_record.xml" value="0.2703125" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_walk_records.xml" value="0.2791666666666667" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_week_view.xml" value="0.2563405797101449" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_write.xml" value="0.2703125" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/calendar_cell.xml" value="0.2563405797101449" />
