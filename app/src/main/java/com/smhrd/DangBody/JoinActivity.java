@@ -133,6 +133,7 @@ public class JoinActivity extends AppCompatActivity {
         edtJoinName = findViewById(R.id.edtJoinName);
         edtJoinNick = findViewById(R.id.edtJoinNick);
         edtJoinPhone = findViewById(R.id.edtJoinPhone);
+        checkImg = findViewById(R.id.checkImg);
 
         btnJoin2 = findViewById(R.id.btnJoin2);
 

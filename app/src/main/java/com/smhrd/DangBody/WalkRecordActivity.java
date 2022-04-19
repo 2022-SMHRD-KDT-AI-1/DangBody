@@ -67,7 +67,7 @@ public class WalkRecordActivity extends AppCompatActivity {
             queue = Volley.newRequestQueue(WalkRecordActivity.this);
         }
 
-        String serverUrl = "http://220.71.97.178:8082/dangbody/WalkService";
+        String serverUrl = "http://220.71.97.178:8082/dangbody/showRecord";
 
         // 서버에 요청한 후 응답데이터를 Log.d()로 출력하시오.
         request = new StringRequest(
