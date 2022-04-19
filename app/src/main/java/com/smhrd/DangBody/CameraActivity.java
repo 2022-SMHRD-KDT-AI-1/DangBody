@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -40,6 +41,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -98,60 +100,27 @@ public class CameraActivity extends AppCompatActivity {
     //이미지 플라시크로 전송
     private void sendImage() {
 
+        Log.d("이미지전송", "dd");
+
         //비트맵 이미지를 byte로 변환 -> base64형태로 변환
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
-
         //base64형태로 변환된 이미지 데이터를 플라스크 서버로 전송
         String flask_url = "http://121.147.52.96:5000/sendFrame";
-
-        ImageRequest imageRequest = new ImageRequest(
-                flask_url,
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap response) {
-//                        byte[] arr = Base64.decode(response, Base64.NO_WRAP);
-//                        Bitmap bm = BitmapFactory.decodeByteArray(arr, 0, arr.length);
-                        img.setImageBitmap(response);
-                    }
-                }, 0, 0, Bitmap.Config.ARGB_8888,
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("image", imageString);
-
-                return params;
-            }
-        };
-
-        queue.add(imageRequest);
 
         StringRequest request = new StringRequest(Request.Method.POST, flask_url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         progress.dismiss();
-//                        if(response.equals("true")){
-//                            Toast.makeText(CameraActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
-//                        }
-//                        else{
-//                            Toast.makeText(CameraActivity.this, "Some error occurred!", Toast.LENGTH_LONG).show();
-//                        }
-                        Log.d("base64_string", response);
 
-//                        byte[] arr = Base64.decode(response, Base64.NO_WRAP);
-//                        Bitmap bm = BitmapFactory.decodeByteArray(arr, 0, arr.length);
-//                        img.setImageBitmap(bm);
+                        byte[] data = Base64.decode(response, Base64.DEFAULT);
+
+                        Bitmap bm = BitmapFactory.decodeByteArray(data, 0, data.length);
+                        img.setImageBitmap(bm);
                     }
                 },
                 new Response.ErrorListener() {
@@ -164,6 +133,9 @@ public class CameraActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
+
+                //강아지이름, 이미지 전달
+
                 params.put("image", imageString);
 
                 return params;
@@ -171,7 +143,12 @@ public class CameraActivity extends AppCompatActivity {
         };
 
         Log.d("CameraActivity","실행전");
-//        queue.add(request);
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                20000,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setShouldCache(false);
+        queue.add(request);
     }
 
     @Override
@@ -346,5 +323,7 @@ public class CameraActivity extends AppCompatActivity {
 
         return image;
     }
+
+
 }
 
