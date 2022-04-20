@@ -40,6 +40,8 @@ public class JoinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
+        btnJoin2 = findViewById(R.id.btnJoin2);
+
         init();
 
 
@@ -122,6 +124,8 @@ public class JoinActivity extends AppCompatActivity {
                     }
                 };
                 requestQueue.add(request);
+                Intent intent = new Intent(JoinActivity.this,JoinPetActivity.class);
+                startActivity(intent);
             }
         });
     }

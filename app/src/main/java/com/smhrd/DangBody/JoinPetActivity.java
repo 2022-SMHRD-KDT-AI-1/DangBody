@@ -3,6 +3,7 @@ package com.smhrd.DangBody;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -44,10 +45,14 @@ public class JoinPetActivity extends AppCompatActivity {
 
     final String TEST="testtest";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_pet);
+
+        btn_toHome = findViewById(R.id.btn_toHome);
+
 
         init();
 
@@ -57,8 +62,11 @@ public class JoinPetActivity extends AppCompatActivity {
         btn_toHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(JoinPetActivity.this, Fragment_home.class);
+                Intent intent = new Intent(JoinPetActivity.this, MainActivity.class);
                 startActivity(intent);
+
+
+
             }
         });
 
