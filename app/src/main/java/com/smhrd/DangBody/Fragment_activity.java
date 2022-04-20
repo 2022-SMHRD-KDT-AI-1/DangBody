@@ -270,15 +270,14 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     }
 
     public void startLocationService() {
-
-        manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
         try {
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                     ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(getActivity(), "퍼미션 획득실패", Toast.LENGTH_LONG).show();
                 return;
             }
+
+            manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
             Location location = getLastKnownLocation();
             //Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -291,16 +290,86 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                 Toast.makeText(getActivity(), "location null", Toast.LENGTH_LONG).show();
             }
 
+            LocationListener locationListener = new LocationListener() {
+                public void onLocationChanged(Location location) {
+                    double lat = location.getLatitude();
+                    double lng = location.getLongitude();
+
+                    String message = "최근 위치 -> Lat:" + lat + ", Lon:" + lng;
+                    textView.setText(message);
+
+                    //카메라 자동이동
+                    CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(lat,lng));
+                    naverMap.moveCamera(cameraUpdate);
+
+                    if( isWalking == true ) {
+                        //10초마다 저장된다.
+
+                        myLatLng.add(new LatLng(lat, lng));
+
+                        displayMeters();
+
+                        //마커세팅
+                        if( oldMarker != null )
+                            oldMarker.setMap(null);
+
+
+                        Marker marker = new Marker();
+                        marker.setPosition(new LatLng(lat, lng));
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.dogicon));
+                        marker.setWidth(80);
+                        marker.setHeight(80);
+                        marker.setHideCollidedSymbols(true);
+                        marker.setMap(naverMap);
+                        oldMarker = marker;
+
+                        // 경로 그리기
+                        if( myLatLng.size() >= 2 ) {
+                            //경로를 다시 그린다.
+                            PathOverlay path = new PathOverlay();
+                            path.setWidth(20);
+                            path.setColor(Color.RED);
+                            path.setCoords(
+                                    (List) myLatLng
+                            );
+                            path.setMap(naverMap);
+                        }else{
+                            Log.d("Main","위치정보리스트가 2미만임.");
+                        }
+                    }
+
+
+                    Log.d("NaverMap>>", "latitude: "+ lat +", longitude: "+ lng);
+                }
+
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+                    Log.d("NaverMap>>", "onStatusChanged");
+                }
+
+                public void onProviderEnabled(String provider) {
+                    Log.d("NaverMap>>", "onProviderEnabled");
+                }
+
+                public void onProviderDisabled(String provider) {
+                    Log.d("NaverMap>>", "onProviderDisabled");
+                }
+            };
+
             //리스너를 이용하여 변경된 위치를 매번 수신함.
-            GPSListener gpsListener = new GPSListener();
-            long minTime = 3000; //3초 타임아웃
-            float minDistance = 0; //0미터 오차허용범위  10미터~30미터
-            manager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    minTime,
-                    minDistance,
-                    gpsListener
-            );
+//            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 0, locationListener);
+            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0, locationListener);
+
+
+//            //LocationListener를 이용하여 변경된 위치를 매번 수신함.
+//            GPSListener gpsListener = new GPSListener();
+//            long minTime = 3000; //3초 타임아웃
+//            float minDistance = 0; //0미터 오차허용범위  10미터~30미터
+//            manager.requestLocationUpdates(
+//                    LocationManager.GPS_PROVIDER,
+//                    minTime,
+//                    minDistance,
+//                    gpsListener
+//            );
 
         } catch (Exception e) {
             e.printStackTrace();
