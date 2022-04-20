@@ -25,6 +25,7 @@ public class EventAdapter extends ArrayAdapter<com.smhrd.DangBody.Event>
     View view;
 
 
+
     public EventAdapter(@NonNull Context context, List<com.smhrd.DangBody.Event> events)
     {
 
@@ -50,12 +51,15 @@ public class EventAdapter extends ArrayAdapter<com.smhrd.DangBody.Event>
 
 //        체크박스
         checkbox_todo = convertView.findViewById(R.id.checkbox_todo);
+//
         checkbox_todo.setChecked(false);
+
         checkbox_todo.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 onCheckboxClicked(view);
+//                checkbox_todo.getText().toString();
             }
         });
 
@@ -65,9 +69,10 @@ public class EventAdapter extends ArrayAdapter<com.smhrd.DangBody.Event>
     }
 
     public void onCheckboxClicked(View view){
+
         if (checkbox_todo.isChecked()) {
             // TODO : CheckBox is checked.
-            Toast.makeText(getContext(), "체크된당!!!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "완료", Toast.LENGTH_LONG).show();
             checkbox_todo.setChecked(true);
         } else {
             // TODO : CheckBox is unchecked.
