@@ -16,6 +16,7 @@
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/drawable/roundcornerrec.xml" value="0.1505" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/drawable/select_button.xml" value="0.1505" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/drawable/splash_background.xml" value="0.1" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/drawable/toproundshape.xml" value="0.1" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_camera.xml" value="0.2791666666666667" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_event_edit.xml" value="0.2563405797101449" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/activity_join.xml" value="0.25" />
@@ -32,7 +33,7 @@
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/community_item.xml" value="0.1" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/custom_layout.xml" value="0.18" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/event_cell.xml" value="0.2563405797101449" />
-        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/fragment_activity.xml" value="0.24074074074074073" />
+        <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/fragment_activity.xml" value="0.25" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/fragment_community.xml" value="0.9" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/fragment_home.xml" value="0.2303370786516854" />
         <entry key="..\:/Users/smhrd/AndroidStudioProjects/DangBody/app/src/main/res/layout/fragment_record.xml" value="0.24074074074074073" />
