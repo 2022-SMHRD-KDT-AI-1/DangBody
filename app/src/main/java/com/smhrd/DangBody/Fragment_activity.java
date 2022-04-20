@@ -87,7 +87,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
     double meters;
     TextView textView, timerText, distanceText;
-    ImageButton btnStart, btnPause, btnCamera;
+    ImageButton btnStart, btnPause, btnCamera, btnWr;
     ArrayList<LatLng> myLatLng = new ArrayList<>();
     boolean isWalking = true;
     Marker oldMarker = null;
@@ -96,7 +96,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     Timer timer;
     TimerTask timerTask;
     Double time = 0.0;
-    Button btnWr;
+
 
     // 서버 전송용 변수
     String walkTime, distance, currentDay;
@@ -284,19 +284,20 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
             if (location != null) {
                 double latitude = location.getLatitude(); //위도 - 가로좌표
                 double longitude = location.getLongitude(); //경도 - 세로좌표
-                String message = "최근 위치 -> Lat:" + latitude + ", Lon:" + longitude;
-                textView.setText(message);
+//                String message = "최근 위치 -> Lat:" + latitude + ", Lon:" + longitude;
+//                textView.setText(message);
             } else {
                 Toast.makeText(getActivity(), "location null", Toast.LENGTH_LONG).show();
             }
 
             LocationListener locationListener = new LocationListener() {
+                @SuppressLint("ResourceAsColor")
                 public void onLocationChanged(Location location) {
                     double lat = location.getLatitude();
                     double lng = location.getLongitude();
 
-                    String message = "최근 위치 -> Lat:" + lat + ", Lon:" + lng;
-                    textView.setText(message);
+//                    String message = "최근 위치 -> Lat:" + lat + ", Lon:" + lng;
+//                    textView.setText(message);
 
                     //카메라 자동이동
                     CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(lat,lng));
@@ -316,7 +317,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
                         Marker marker = new Marker();
                         marker.setPosition(new LatLng(lat, lng));
-                        marker.setIcon(OverlayImage.fromResource(R.drawable.dogicon));
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.icons_mappin));
                         marker.setWidth(80);
                         marker.setHeight(80);
                         marker.setHideCollidedSymbols(true);
@@ -328,7 +329,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                             //경로를 다시 그린다.
                             PathOverlay path = new PathOverlay();
                             path.setWidth(20);
-                            path.setColor(Color.RED);
+                            path.setColor(R.color.polyline);
                             path.setCoords(
                                     (List) myLatLng
                             );
@@ -409,6 +410,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     //GPS로 위치받아오기
     class GPSListener implements LocationListener {
 
+        @SuppressLint("ResourceAsColor")
         @Override
         public void onLocationChanged(@NonNull Location location) {
             double latitude = location.getLatitude();
@@ -462,7 +464,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                     //경로를 다시 그린다.
                     PathOverlay path = new PathOverlay();
                     path.setWidth(20);
-                    path.setColor(Color.RED);
+                    path.setColor(R.color.polyline);
                     path.setCoords(
                             (List) myLatLng
                             //     (List) MainActivity.this.myLatLng
