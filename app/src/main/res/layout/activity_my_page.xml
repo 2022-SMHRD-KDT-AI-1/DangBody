@@ -6,48 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".MyPage">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="62dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_begin="537dp" />
 
-    <TextView
-        android:id="@+id/tv_family"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="156dp"
-        android:text="@string/tv_family"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.127"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
+    <EditText
         android:id="@+id/tv_friend"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/tv_friend"
-        android:textSize="20sp"
+        android:backgroundTint="#FFE0B2"
+        android:ems="10"
+        android:text=" 친구관리"
+        android:hint="@string/userId"
+        android:inputType="textPersonName"
+        android:textSize="12sp"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="51dp"
         app:layout_constraintEnd_toEndOf="@+id/tv_family"
         app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="@+id/tv_family"
         app:layout_constraintTop_toBottomOf="@+id/tv_family" />
 
-    <TextView
-        android:id="@+id/tv_pet"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/tv_family"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="댕댕이 관리"
-        android:textSize="20sp"
+        android:backgroundTint="#FFE0B2"
+        android:layout_marginTop="116dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="가족관리"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="16dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/tv_pet"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFE0B2"
+        android:ems="10"
+
+        android:text=" 댕댕이 관리"
+        android:inputType="textPersonName"
+        android:textSize="12sp"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="87dp"
         app:layout_constraintEnd_toEndOf="@+id/tv_friend"
         app:layout_constraintStart_toStartOf="@+id/tv_friend"
-        app:layout_constraintTop_toBottomOf="@+id/tv_friend" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_friend"/>
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="370dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
