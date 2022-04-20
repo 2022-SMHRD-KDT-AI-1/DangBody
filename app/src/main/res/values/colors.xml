@@ -10,4 +10,5 @@
     <color name="blue">#FFFFFFFF</color>
     <color name="gray">#FFFFFFFF</color>
     <color name="splash_background">#FFBB86FC</color>
+    <color name="polyline">#008968</color>
 </resources>

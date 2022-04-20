@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Fragment_activity">
 
+    <!--    지도관련 버튼 라운드 배경 -->
+
     <com.naver.maps.map.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
@@ -19,95 +21,222 @@
 
     </com.naver.maps.map.MapView>
 
-<!--    지도관련 버튼 라운드 배경 -->
-    <View
-        android:id="@+id/view5"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="400dp"
-        android:background="@drawable/toproundshape"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="@+id/mapView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/mapView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <ImageButton
-        android:id="@+id/btnCamera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:src="@android:drawable/ic_menu_camera"
-        app:layout_constraintBottom_toBottomOf="@+id/btnPause"
-        app:layout_constraintStart_toEndOf="@+id/btnPause"
-        app:layout_constraintTop_toTopOf="@+id/btnPause"
-        app:layout_constraintVertical_bias="1.0" />
+        <View
+            android:id="@+id/view5"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:background="@drawable/toproundshape"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:src="@android:drawable/ic_media_play"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.644" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="134dp" />
 
-    <ImageButton
-        android:id="@+id/btnPause"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:src="@android:drawable/ic_media_pause"
-        app:layout_constraintBottom_toBottomOf="@+id/btnStart"
-        app:layout_constraintStart_toEndOf="@+id/btnStart"
-        app:layout_constraintTop_toTopOf="@+id/btnStart"
-        app:layout_constraintVertical_bias="1.0" />
+        <TextView
+            android:id="@+id/timerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"
+            android:textColor="#008968"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/distanceText"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="99dp"
-        android:background="#EA1212"
-        android:text="내위치 :"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시간"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/timerText"
+            app:layout_constraintTop_toBottomOf="@+id/timerText" />
 
-    <TextView
-        android:id="@+id/timerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#EA1212"
-        android:text="00:00:00"
-        app:layout_constraintBottom_toTopOf="@+id/btnPause"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.428" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="2px"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:background="#8baa80"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline15"
+            app:layout_constraintTop_toTopOf="@+id/view5" />
 
-    <TextView
-        android:id="@+id/distanceText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#EA1212"
-        android:text="0.0"
-        app:layout_constraintBottom_toTopOf="@+id/btnCamera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/timerText"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/distanceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="0.0"
+            android:textColor="#008968"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
-    <Button
-        android:id="@+id/btnWr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="일지로출발~"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnPause"
-        app:layout_constraintTop_toBottomOf="@+id/btnCamera" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/textView"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="32dp"-->
+        <!--            android:text="현위치"-->
+        <!--            android:textColor="#FF6041"-->
+        <!--            android:textSize="10sp"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/textView13"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/distanceText"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/timerText"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/textView20"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="GPS"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/textView"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/textView"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/textView" />-->
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="km"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/distanceText"
+            app:layout_constraintTop_toBottomOf="@+id/distanceText" />
+
+        <ImageButton
+            android:id="@+id/btnStart"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:background="#00000000"
+            android:contentDescription="산책시작"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icons_mapstart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline15"
+            app:layout_constraintTop_toTopOf="@+id/guideline12" />
+
+        <ImageButton
+            android:id="@+id/btnPause"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:background="#00000000"
+            android:contentDescription="산책종료"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icons_mapstop"
+            app:layout_constraintBottom_toBottomOf="@+id/btnStart"
+            app:layout_constraintEnd_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="@+id/btnStart" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="2px"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:background="#8baa80"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="@+id/view5" />
+
+        <ImageButton
+            android:id="@+id/btnWr"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:background="#00000000"
+            android:contentDescription="산책기록"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icons_maprecord"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="@+id/guideline12" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="산책일지"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/btnWr"
+            app:layout_constraintStart_toStartOf="@+id/btnWr"
+            app:layout_constraintTop_toBottomOf="@+id/btnWr" />
+
+        <ImageButton
+            android:id="@+id/btnCamera"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="16dp"
+            android:background="#00000000"
+            android:contentDescription="사진촬영"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icons_mapcamera"
+            app:layout_constraintBottom_toBottomOf="@+id/btnWr"
+            app:layout_constraintStart_toEndOf="@+id/btnWr"
+            app:layout_constraintTop_toTopOf="@+id/btnWr" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사진촬영"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView20"
+            app:layout_constraintEnd_toEndOf="@+id/btnCamera"
+            app:layout_constraintStart_toStartOf="@+id/btnCamera"
+            app:layout_constraintTop_toTopOf="@+id/textView20" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="128dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="128dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="147dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
