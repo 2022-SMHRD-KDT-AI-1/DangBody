@@ -25,7 +25,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
@@ -40,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences loginData;
 
     String id,pw;
-    String petName = "bean";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,15 +98,24 @@ public class LoginActivity extends AppCompatActivity {
                             //Log.d("확인","로그인성공완");
 
                             try {
-                                findPet();
                                 JSONObject obj = new JSONObject(response);
 
-                                String userId = obj.getString("user_id");
-                                String userNick = obj.getString("user_nick");
-                                String userPw = obj.getString("user_pw");
-                                Log.d("사용자",userId+"/"+userNick);
+                                String user = obj.getString("user"); // json형태의 String
+                                JSONArray pet = obj.getJSONArray("list"); // list형태의 값을 JSONArray
 
-                                save(userId,userPw);
+                                JSONObject jsonUser = new JSONObject(user);// user는 jsonObj로 다시 변환
+
+
+                                // user에 관한 정보 키를 통해 찾게 함
+                                String userId = jsonUser.getString("user_id");
+                                String userNick = jsonUser.getString("user_nick");
+                                String userPw = jsonUser.getString("user_pw");
+                                String petName = pet.get(0).toString();
+
+                                Log.d("사용자","user_id는 "+userId+", user_nick은 "+userNick+", 첫 반려견 이름은 "+petName);
+
+
+                                save(userId,userPw,userNick,petName);
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
 
@@ -133,66 +143,13 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
 
-    private void findPet() {
-        String url = "http://220.71.97.178:8082/dangbody/FindPetName";
-        Log.d("확인","이름찾기 시작");
-        request = new StringRequest(
-                Request.Method.POST,
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //Log.d("Test", response);
-
-                        if(response.equals("0")){
-                            Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
-                            Log.d("확인","이름 찾기 실패");
-                        }else{
-                            Log.d("응답",response);
-                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
-                            Log.d("확인","이름 찾기 성공");
-
-                            try {
-                                JSONArray array = new JSONArray(response);
-                                StringBuffer sb = new StringBuffer();
-
-                                for(int i = 0 ; i<array.length(); i++){
-                                    JSONObject obj =(JSONObject)array.get(i);
-                                    String pn = obj.getString("pet_name");
-
-                                    sb.append(pn);
-                                    Log.d("확인",pn);
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> param = new HashMap<>();
-                param.put("user_id", id);
-                param.put("user_pw", pw);
-                return param;
-            }
-        };
-        requestQueue.add(request);
-    }
-
-    private void save(String userId, String userPw){
+    private void save(String userId, String userPw, String userNick, String petName){
         SharedPreferences.Editor editor = loginData.edit();
 
         editor.putBoolean("SAVE_LOGIN_DATA", checkBox.isChecked());
         editor.putString("user_id",userId);
         editor.putString("user_pw",userPw);
+        editor.putString("user_nick",userNick);
         editor.putString("pet_name",petName);
 
         editor.commit();
@@ -203,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
     saveLoginData = loginData.getBoolean("SAVE_LOGIN_DATA",false);
     id = loginData.getString("user_id","");
     pw = loginData.getString("user_pw","");
-    petName = loginData.getString("pet_name","이름없음2");
+
     }
 
     // xml view 초기화
