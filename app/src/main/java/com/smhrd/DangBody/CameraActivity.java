@@ -74,7 +74,7 @@ public class CameraActivity extends AppCompatActivity {
 
         init();
         sp = getSharedPreferences("loginData",MODE_PRIVATE);
-        pet_name = "bean";
+        pet_name = sp.getString("pet_name","이름없어");
         id=sp.getString("user_id","사람이름");
 
 
