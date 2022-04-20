@@ -56,8 +56,8 @@ public class CommnityAdapter extends RecyclerView.Adapter<CommnityAdapter.ViewHo
 
         public void setItem(CommunityVO item){
 
-            imgProfile.setImageResource(R.drawable.dang1);
-            imgPost.setImageResource(R.drawable.dang1);
+            imgProfile.setImageResource(item.getProfile());
+            imgPost.setImageResource(item.getPost());
             tvNick.setText(item.getNick());
             tvContent.setText(item.getContent());
 
