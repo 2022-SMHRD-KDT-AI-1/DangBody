@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -152,12 +153,16 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("확인","이름 찾기 성공");
 
                             try {
-                                JSONObject obj = new JSONObject(response);
+                                JSONArray array = new JSONArray(response);
+                                StringBuffer sb = new StringBuffer();
 
-                                String pn = obj.getString("pet_name");
+                                for(int i = 0 ; i<array.length(); i++){
+                                    JSONObject obj =(JSONObject)array.get(i);
+                                    String pn = obj.getString("pet_name");
 
-                                Log.d("확인",pn);
-
+                                    sb.append(pn);
+                                    Log.d("확인",pn);
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

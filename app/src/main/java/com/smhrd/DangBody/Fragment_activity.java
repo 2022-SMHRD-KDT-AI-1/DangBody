@@ -51,6 +51,7 @@ import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.overlay.PathOverlay;
@@ -251,6 +252,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 //
 //        uiSettings.setLocationButtonEnabled(true);
 //
+//
 //        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
         //타이머 추가코드
@@ -268,15 +270,14 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     }
 
     public void startLocationService() {
-
-        manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
         try {
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                     ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(getActivity(), "퍼미션 획득실패", Toast.LENGTH_LONG).show();
                 return;
             }
+
+            manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
             Location location = getLastKnownLocation();
             //Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -289,19 +290,90 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                 Toast.makeText(getActivity(), "location null", Toast.LENGTH_LONG).show();
             }
 
+            LocationListener locationListener = new LocationListener() {
+                public void onLocationChanged(Location location) {
+                    double lat = location.getLatitude();
+                    double lng = location.getLongitude();
+
+                    String message = "최근 위치 -> Lat:" + lat + ", Lon:" + lng;
+                    textView.setText(message);
+
+                    //카메라 자동이동
+                    CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(lat,lng));
+                    naverMap.moveCamera(cameraUpdate);
+
+                    if( isWalking == true ) {
+                        //10초마다 저장된다.
+
+                        myLatLng.add(new LatLng(lat, lng));
+
+                        displayMeters();
+
+                        //마커세팅
+                        if( oldMarker != null )
+                            oldMarker.setMap(null);
+
+
+                        Marker marker = new Marker();
+                        marker.setPosition(new LatLng(lat, lng));
+                        marker.setIcon(OverlayImage.fromResource(R.drawable.dogicon));
+                        marker.setWidth(80);
+                        marker.setHeight(80);
+                        marker.setHideCollidedSymbols(true);
+                        marker.setMap(naverMap);
+                        oldMarker = marker;
+
+                        // 경로 그리기
+                        if( myLatLng.size() >= 2 ) {
+                            //경로를 다시 그린다.
+                            PathOverlay path = new PathOverlay();
+                            path.setWidth(20);
+                            path.setColor(Color.RED);
+                            path.setCoords(
+                                    (List) myLatLng
+                            );
+                            path.setMap(naverMap);
+                        }else{
+                            Log.d("Main","위치정보리스트가 2미만임.");
+                        }
+                    }
+
+
+                    Log.d("NaverMap>>", "latitude: "+ lat +", longitude: "+ lng);
+                }
+
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+                    Log.d("NaverMap>>", "onStatusChanged");
+                }
+
+                public void onProviderEnabled(String provider) {
+                    Log.d("NaverMap>>", "onProviderEnabled");
+                }
+
+                public void onProviderDisabled(String provider) {
+                    Log.d("NaverMap>>", "onProviderDisabled");
+                }
+            };
+
             //리스너를 이용하여 변경된 위치를 매번 수신함.
-            GPSListener gpsListener = new GPSListener();
-            long minTime = 3000; //3초 타임아웃
-            float minDistance = 0; //0미터 오차허용범위  10미터~30미터
-            manager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
-                    minTime,
-                    minDistance,
-                    gpsListener
-            );
+//            manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 0, locationListener);
+            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0, locationListener);
+
+
+//            //LocationListener를 이용하여 변경된 위치를 매번 수신함.
+//            GPSListener gpsListener = new GPSListener();
+//            long minTime = 3000; //3초 타임아웃
+//            float minDistance = 0; //0미터 오차허용범위  10미터~30미터
+//            manager.requestLocationUpdates(
+//                    LocationManager.GPS_PROVIDER,
+//                    minTime,
+//                    minDistance,
+//                    gpsListener
+//            );
 
         } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_SHORT).show();
         }
 
         Toast.makeText(getActivity(), "GPS좌표 요청함.", Toast.LENGTH_LONG).show();
@@ -321,7 +393,6 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
-
             }
             Location l = manager.getLastKnownLocation(provider);
             if (l == null) {
@@ -343,13 +414,14 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
 
+            Toast.makeText(getActivity(), "GPS실행!", Toast.LENGTH_SHORT).show();
+
             String message = "내 위치 -> Lat:" + latitude + ", Lon:" + longitude;
-            Log.d("Main", message);
+            Log.d("Fragment_activity", message);
 
             //카메라 자동이동
             CameraUpdate cameraUpdate = CameraUpdate.scrollTo(new LatLng(latitude, longitude));
             naverMap.moveCamera(cameraUpdate);
-
 
             textView.setText(message);
             distance = String.format("%.1f", meters);
@@ -508,6 +580,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         timerTask = new TimerTask() {
             @Override
             public void run() {
+
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -704,7 +777,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
     //스크린샷 시작
 
-        public static File takeScreenShot(View mapView, String fileName){
+    public static File takeScreenShot(View mapView, String fileName){
         Date date2 = new Date();
         CharSequence format = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss").format(new Date());
 
