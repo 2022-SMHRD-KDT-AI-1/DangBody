@@ -1,11 +1,15 @@
 package com.smhrd.DangBody;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.smhrd.DangBody.MyPage;
@@ -25,7 +30,9 @@ public class Fragment_home extends Fragment {
 
     ImageView img_dangBody, img_myPage;
     Button btn_dangbodyCamera, btn_dangbodyGallery, btn_testLogin;
-    TextView tv_dangbodyInfo;
+    LinearLayout layout;
+    TextView details;
+    CardView cardView;
 
 
     public Fragment_home() { }
@@ -59,13 +66,27 @@ public class Fragment_home extends Fragment {
         });
 
         // 댕바디 정보 띄워주기
-        tv_dangbodyInfo=view.findViewById(R.id.tv_dangbodyInfo);
+        layout = view.findViewById(R.id.layout);
+        details = view.findViewById(R.id.details);
+        cardView = view.findViewById(R.id.cardview);
+        layout.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                expand();
+            }
+        });
+
+
+
+
 
         String[]randomTxt = getResources().getStringArray(R.array.randomTxt);
         Random random = new Random();
         int n = random.nextInt(randomTxt.length - 1);
 
-        tv_dangbodyInfo.setText(randomTxt[n]);
+        details.setText(randomTxt[n]);
 
 
 
@@ -121,6 +142,11 @@ public class Fragment_home extends Fragment {
 
     }
 
+    private void expand() {
+        int v = (details.getVisibility()==View.GONE)? View.VISIBLE:View.GONE;
+        TransitionManager.beginDelayedTransition(layout, new AutoTransition());
+        details.setVisibility(v);
+    }
 
 
 }
