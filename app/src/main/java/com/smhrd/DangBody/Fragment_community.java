@@ -36,11 +36,11 @@ public class Fragment_community extends Fragment {
         btnWrite = view.findViewById(R.id.btnWrite);
         adapter = new CommnityAdapter();
 
-        adapter.addItem(new CommunityVO("js", "안녕"));
-        adapter.addItem(new CommunityVO("br", "안녕"));
-        adapter.addItem(new CommunityVO("hj", "안녕"));
-        adapter.addItem(new CommunityVO("jw", "안녕"));
-        adapter.addItem(new CommunityVO("sr", "안녕"));
+        adapter.addItem(new CommunityVO(R.drawable.base, R.drawable.ay, "DangBody_USER1", "안녕"));
+        adapter.addItem(new CommunityVO(R.drawable.base, R.drawable.tori1,"DangBody_USER2", "안녕"));
+        adapter.addItem(new CommunityVO(R.drawable.base, R.drawable.tori2, "DangBody_USER3", "안녕"));
+        adapter.addItem(new CommunityVO(R.drawable.base, R.drawable.tori3, "DangBody_USER4", "안녕"));
+        adapter.addItem(new CommunityVO(R.drawable.base, R.drawable.jy, "DangBody_USER5", "안녕"));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
