@@ -136,7 +136,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         locationSource = new FusedLocationSource(getActivity(), LOCATION_PERMISSION_REQUEST_CODE);
         sp = getActivity().getSharedPreferences("user_id", Context.MODE_PRIVATE);
 
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         date = new Date();
         currentDay = sdf1.format(date);
 
@@ -158,8 +158,8 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                 stopTapped(null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("")
-                        .setMessage("산책 기록을 저장하시겠습니까?")
-                        .setPositiveButton("저장", new DialogInterface.OnClickListener() {
+                        .setMessage("산책을 마치시겠습니까?")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String url = "http://220.71.97.178:8082/dangbody/WalkService";
@@ -197,12 +197,12 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
 
                                         params.put("user_id", sp.getString("user_id", "test"));
                                         params.put("walk_time", walkTime);
-                                        params.put("walk_distance", distance);
+                                        params.put("walk_distance", String.format("%.1f", meters));
                                         params.put("walk_date", currentDay);
 
                                         Log.d("Main", "user_id:" + sp.getString("user_id", "test"));
                                         Log.d("Main", "walkTime:" + walkTime);
-                                        Log.d("Main", "distance:" + distance);
+                                        Log.d("Main", "distance:" + String.format("%.1f", meters));
                                         Log.d("Main", "currentDay:" + currentDay);
 
                                         return params;
@@ -602,16 +602,20 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     private String getTimerText() {
         int rounded = (int) Math.round(time);
 
-        int seconds = ((rounded % 86400) % 3600) % 60;
+//        int seconds = ((rounded % 86400) % 3600) % 60;
         int minutes = ((rounded % 86400) % 3600) / 60;
         int hours = ((rounded % 86400) / 3600);
 
-        return formatTime(seconds, minutes, hours);
+//        return formatTime(seconds, minutes, hours);
+        return formatTime(minutes,hours);
     }
 
     @NonNull
-    private String formatTime(int seconds, int minutes, int hours) {
-        return String.format("%02d", hours) + " : " + String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
+//    private String formatTime(int seconds, int minutes, int hours) {
+//        return String.format("%02d", hours) + " : " + String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
+//    }
+    private String formatTime(int minutes, int hours) {
+        return String.format("%02d", hours) + " : " + String.format("%02d", minutes);
     }
 
     //타이머 끝
