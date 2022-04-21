@@ -126,7 +126,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         MapView mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         //추가
-        textView = view.findViewById(R.id.textView);
+
         timerText = view.findViewById(R.id.timerText);
         btnStart = view.findViewById(R.id.btnStart);
         btnPause = view.findViewById(R.id.btnPause);
