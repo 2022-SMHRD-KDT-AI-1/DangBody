@@ -29,7 +29,7 @@ public class WalkRecordActivity extends AppCompatActivity {
 
     RequestQueue queue;
     StringRequest request;
-    TextView time, meters, date;
+    TextView time, meters, date, tvtop, tvCount, tvCountd, tvCountt;
     SharedPreferences loginData;
     String userID;
 
@@ -39,6 +39,10 @@ public class WalkRecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walk_record);
         //로그인 정보
+        tvtop = findViewById(R.id.tvtop);
+        tvCount = findViewById(R.id.tvCount);
+        tvCountd = findViewById(R.id.tvCountd);
+        tvCountt = findViewById(R.id.tvCountt);
         loginData = getSharedPreferences("loginData",MODE_PRIVATE);
 
 //        time = findViewById(R.id.time);
@@ -53,7 +57,7 @@ public class WalkRecordActivity extends AppCompatActivity {
 //        adapter.addItem(new WalkRecord("123","123","123"));
 //        adapter.addItem(new WalkRecord("456","456","456"));
 //        rvWalkRecord.setAdapter(adapter);
-
+        tvtop.setText(loginData.getString("pet_name","멍멍이") + "의 산책 기록입니다.");
         if(queue == null){
             queue = Volley.newRequestQueue(WalkRecordActivity.this);
         }
@@ -70,6 +74,11 @@ public class WalkRecordActivity extends AppCompatActivity {
                         Log.d("WalkRecordActivity", response);
 
                         try {
+                            double SumD = 0;
+                            int count = 0;
+                            int hour = 0;
+                            int minute = 0;
+                            int sumTime = 0;
                             JSONArray array = new JSONArray(response);
 
                             StringBuffer sb = new StringBuffer();
@@ -79,7 +88,18 @@ public class WalkRecordActivity extends AppCompatActivity {
 
                                 walk_time = obj.getString("walk_time");
                                 walk_distance = obj.getString("walk_distance");
+                                double wd = Double.parseDouble(walk_distance);
+                                String wth = walk_time.substring(0,2);
+                                String wtm = walk_time.substring(walk_time.length()-2,walk_time.length());
+                                hour = Integer.parseInt(wth);
+                                minute = Integer.parseInt(wtm);
+                                sumTime += hour*60 + minute;
                                 walk_date = obj.getString("walk_date");
+
+
+
+                                SumD += wd;
+                                count ++;
 
                                 sb.append(walk_time);
                                 sb.append("/");
@@ -92,8 +112,18 @@ public class WalkRecordActivity extends AppCompatActivity {
                                 Log.d("main","walk_time" + walk_date);
                                 Log.d("main","walk_time" + walk_distance);
 
-                                adapter.addItem(new WalkRecord(walk_time,walk_distance,walk_date));
+                                if(wd < 1 && wd!=0) {
+                                    adapter.addItem(new WalkRecord(walk_time+"분", "0"+walk_distance + "km", walk_date));
+                                }
+                                else{
+                                    adapter.addItem(new WalkRecord(walk_time+"분", walk_distance + "km", walk_date));
+                                }
+
+
                             }//end for
+
+                            hour = sumTime/60;
+                            minute = sumTime%60;
 //                            time.setText(sb.toString());
 //                            meters.setText(sb.toString());
 //                            date.setText(sb.toString());
@@ -105,9 +135,17 @@ public class WalkRecordActivity extends AppCompatActivity {
                             rvWalkRecord.setLayoutManager(layoutManager);
                             rvWalkRecord.setAdapter(adapter);
 
+                            tvCount.setText(String.valueOf(count));
+                            tvCountd.setText(String.valueOf(SumD));
+                            tvCountt.setText(String.valueOf(hour) + ":" + String.valueOf(minute));
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+
+
+
                     }
                 },
                 new Response.ErrorListener() {
