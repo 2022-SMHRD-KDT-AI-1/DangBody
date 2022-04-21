@@ -7,70 +7,128 @@
     tools:context=".MyPage">
 
 
-    <EditText
-        android:id="@+id/tv_friend"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFE0B2"
-        android:ems="10"
-        android:text=" 친구관리"
-        android:hint="@string/userId"
-        android:inputType="textPersonName"
-        android:textSize="12sp"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="51dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_family"
-        app:layout_constraintHorizontal_bias="0.465"
-        app:layout_constraintStart_toStartOf="@+id/tv_family"
-        app:layout_constraintTop_toBottomOf="@+id/tv_family" />
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginBottom="4dp"
+        android:alpha="0.3"
+        android:foregroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/img_personanddogs" />
 
-    <EditText
+    <TextView
         android:id="@+id/tv_family"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFE0B2"
-        android:layout_marginTop="116dp"
+        android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="가족관리"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="16dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:textColor="#8B1A47"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/imageView4" />
 
-    <EditText
-        android:id="@+id/tv_pet"
-        android:layout_width="200dp"
+
+    <TextView
+        android:id="@+id/tv_friend"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFE0B2"
         android:ems="10"
-
-        android:text=" 댕댕이 관리"
+        android:hint="@string/userId"
         android:inputType="textPersonName"
-        android:textSize="12sp"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="87dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_friend"
-        app:layout_constraintStart_toStartOf="@+id/tv_friend"
-        app:layout_constraintTop_toBottomOf="@+id/tv_friend"/>
+        android:text="친구관리"
+        android:textColor="#8B1A47"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+        app:layout_constraintStart_toStartOf="@+id/tv_pet" />
 
+    <TextView
+        android:id="@+id/tv_pet"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
 
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="댕댕이 관리"
+        android:textColor="#8B1A47"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/tv_family" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="40dp" />
+        app:layout_constraintGuide_begin="16dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="370dp" />
+        app:layout_constraintGuide_end="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="295dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/guideline18"
+        app:srcCompat="@drawable/img_boy" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:srcCompat="@drawable/img_dog" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:srcCompat="@drawable/img_goldfish" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_mypage" />
+
+    <View
+        android:id="@+id/view9"
+        android:layout_width="350dp"
+        android:layout_height="3px"
+        android:background="#8baa80"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
