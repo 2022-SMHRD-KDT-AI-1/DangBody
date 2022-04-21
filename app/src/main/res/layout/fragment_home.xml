@@ -108,7 +108,8 @@
             android:layout_margin="20dp"
             app:cardCornerRadius="20sp"
             app:cardElevation="10dp"
-            app:contentPadding="20dp"
+            app:contentPadding="8dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,20 +117,41 @@
 
             <LinearLayout
                 android:id="@+id/layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:animateLayoutChanges="true"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="알아보자"-->
+                <!--                    android:textColor="#000"-->
+                <!--                    android:textSize="32sp"-->
+                <!--                    android:textStyle="bold">-->
+
+                <!--                </TextView>-->
+
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="알아보자"
-                    android:textColor="#000"
-                    android:textSize="32sp"
-                    android:textStyle="bold">
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="0dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:scaleType="fitXY">
 
-                </TextView>
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/image_slide"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="477dp" />
+
+                </androidx.viewpager.widget.ViewPager>
 
                 <TextView
                     android:id="@+id/details"
@@ -143,6 +165,7 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

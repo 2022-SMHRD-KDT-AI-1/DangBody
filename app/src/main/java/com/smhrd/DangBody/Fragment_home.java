@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.smhrd.DangBody.MyPage;
 
@@ -33,6 +35,7 @@ public class Fragment_home extends Fragment {
     LinearLayout layout;
     TextView details;
     CardView cardView;
+    ViewPager viewPager;
 
 
     public Fragment_home() { }
@@ -82,13 +85,32 @@ public class Fragment_home extends Fragment {
 
 
 
-        String[]randomTxt = getResources().getStringArray(R.array.randomTxt);
-        Random random = new Random();
-        int n = random.nextInt(randomTxt.length - 1);
+//        String[]randomTxt = getResources().getStringArray(R.array.randomTxt);
+//        Random random = new Random();
+//        int n = random.nextInt(randomTxt.length - 1);
+//
+//        details.setText(randomTxt[n]);
 
-        details.setText(randomTxt[n]);
+     //   onCreate 함수 안에 drawable 안에 있는 이미지를 사용할 변수.
 
 
+
+//        int images[] = {
+//                R.drawable.image_slide,
+//                R.drawable.image_slide2,
+//                R.drawable.image_slide3
+//        };
+
+
+//        //뷰 페이저 초기화
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getActivity());
+        viewPager.setAdapter(viewPagerAdapter);
+
+//        for(int image : images) {
+//            fllipperImages(image);
+//        }
 
 
 
@@ -141,6 +163,23 @@ public class Fragment_home extends Fragment {
 
 
     }
+
+//    public void fllipperImages(int image) {
+//        ImageView imageView = new ImageView(getActivity());
+//        imageView.setBackgroundResource(image);
+//
+//        v_fllipper.addView(imageView);      // 이미지 추가
+//        v_fllipper.setFlipInterval(4000);       // 자동 이미지 슬라이드 딜레이시간(1000 당 1초)
+//        v_fllipper.setAutoStart(true);          // 자동 시작 유무 설정
+//
+//        // animation
+//        v_fllipper.setInAnimation(getActivity(),android.R.anim.slide_in_left);
+//        v_fllipper.setOutAnimation(getActivity(),android.R.anim.slide_out_right);
+
+
+
+
+//    }
 
     private void expand() {
         int v = (details.getVisibility()==View.GONE)? View.VISIBLE:View.GONE;
