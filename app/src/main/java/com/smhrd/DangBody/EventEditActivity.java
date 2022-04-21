@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class EventEditActivity extends AppCompatActivity
 {
-    private EditText eventNameET;
+    EditText eventNameET;
     private TextView eventDateTV, eventTimeTV;
     private LocalTime time;
     private Button plusButton;
@@ -55,13 +55,14 @@ public class EventEditActivity extends AppCompatActivity
 
         reqDate = CalendarUtils.formattedDate(CalendarUtils.selectedDate);
         reqTime = CalendarUtils.formattedTime(time);
-        reqTitle = eventNameET.getText().toString();
 
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String url = "http://220.71.97.178:8082/dangbody/RecordNoticeService";
                 Log.d("버튼 클릭","완완!");
+                reqTitle = eventNameET.getText().toString();
+                Log.d("버튼 클릭",reqTitle);
                 request = new StringRequest(
                         Request.Method.POST,
                         url,
