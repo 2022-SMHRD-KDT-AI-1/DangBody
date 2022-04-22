@@ -1,64 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".EventEditActivity">
 
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="364dp"
+        android:layout_height="338dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="340dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_personanddogcat" />
+
     <TextView
+        android:id="@+id/textView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="목표"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="일정추가"
+        android:textColor="#232323"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view10"
+        android:layout_width="400dp"
+        android:layout_height="2px"
+        android:background="#D3D3D3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
     <EditText
         android:id="@+id/eventNameET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="320dp"
+        android:layout_height="42dp"
         android:layout_gravity="center"
-        android:textSize="20sp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="32dp"
         android:ems="10"
-        android:inputType="text"/>
+        android:hint="추가하고싶은 일정 혹은 목표를 적어주세요"
+        android:inputType="text"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view10" />
 
     <TextView
         android:id="@+id/eventDateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
         android:text="Date"
-        android:textSize="20sp"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:textColor="#C1C1C1"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/eventNameET"
+        app:layout_constraintTop_toBottomOf="@+id/eventNameET" />
 
     <TextView
         android:id="@+id/eventTimeTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:text="Time"
-        android:textSize="20sp"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:textColor="#C1C1C1"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/eventNameET"
+        app:layout_constraintTop_toBottomOf="@+id/eventNameET" />
 
     <Button
         android:id="@+id/plusButton"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="52dp"
         android:background="@null"
+        android:backgroundTint="#FFFFFF"
         android:onClick="saveEventAction"
-        android:text="추가"
-        android:textColor="@color/blue"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:text="등록"
+        android:textColor="#ff6041"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventNameET"
+        app:strokeColor="#ff6041"
+        app:strokeWidth="3dp" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

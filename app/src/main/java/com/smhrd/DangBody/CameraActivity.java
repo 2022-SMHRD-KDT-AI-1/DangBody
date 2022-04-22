@@ -75,7 +75,7 @@ public class CameraActivity extends AppCompatActivity {
         init();
         sp = getSharedPreferences("loginData",MODE_PRIVATE);
         pet_name = sp.getString("pet_name","이름없어");
-        id=sp.getString("user_id","사람이름");
+        id=sp.getString("user_id","사람이름없네");
 
 
         btn_capture.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +116,7 @@ public class CameraActivity extends AppCompatActivity {
         imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
         //base64형태로 변환된 이미지 데이터를 플라스크 서버로 전송
-        String flask_url = "http://121.147.52.96:5000/sendFrame";
+        String flask_url ="http://e1.project-jupyter.ddns.net:8861/sendFrame";
 
         StringRequest request = new StringRequest(Request.Method.POST, flask_url,
                 new Response.Listener<String>() {

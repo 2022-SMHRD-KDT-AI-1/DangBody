@@ -21,15 +21,18 @@
         <!--        댕바디 이미지 -->
 
         <!--        마이페이지 아이콘 -->
+
         <ImageView
             android:id="@+id/img_dangBody"
             android:layout_width="321dp"
             android:layout_height="281dp"
+            android:layout_marginTop="32dp"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.175"
+            app:layout_constraintVertical_bias="0.542"
             tools:srcCompat="@drawable/img_dangbody" />
 
         <ImageView
@@ -46,11 +49,13 @@
         <Button
             android:id="@+id/btn_dangbodyGallery"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginStart="68dp"
             android:layout_marginEnd="32dp"
+            android:backgroundTint="#ffffff"
             android:text="댕바디목록"
-            android:textColor="#515151"
+            android:textColor="#FF6041"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:cornerRadius="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/btn_dangbodyCamera"
@@ -58,22 +63,27 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/btn_dangbodyCamera"
             app:layout_constraintTop_toTopOf="@+id/btn_dangbodyCamera"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            app:strokeColor="#FF6041"
+            app:strokeWidth="3dp" />
 
         <!--        댕바디 찍기-->
+
         <Button
             android:id="@+id/btn_dangbodyCamera"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginStart="32dp"
+            android:backgroundTint="#ffffff"
             android:text="댕바디찍기"
-            android:textColor="#515151"
+            android:textColor="#FF6041"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:cornerRadius="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/img_dangBody"
-            app:layout_constraintTop_toBottomOf="@+id/img_dangBody"
-            app:layout_constraintVertical_bias="0.304" />
+            app:strokeColor="#FF6041"
+            app:strokeWidth="3dp" />
 
         <Button
             android:id="@+id/btn_testLogin"
@@ -93,8 +103,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="411dp"
+        android:layout_height="251dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
