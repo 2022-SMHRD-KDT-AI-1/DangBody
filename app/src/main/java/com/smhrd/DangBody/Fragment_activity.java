@@ -602,21 +602,21 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
     private String getTimerText() {
         int rounded = (int) Math.round(time);
 
-//        int seconds = ((rounded % 86400) % 3600) % 60;
+        int seconds = ((rounded % 86400) % 3600) % 60;
         int minutes = ((rounded % 86400) % 3600) / 60;
         int hours = ((rounded % 86400) / 3600);
 
-//        return formatTime(seconds, minutes, hours);
-        return formatTime(minutes,hours);
+        return formatTime(seconds, minutes, hours);
+//        return formatTime(minutes,hours);
     }
 
     @NonNull
-//    private String formatTime(int seconds, int minutes, int hours) {
-//        return String.format("%02d", hours) + " : " + String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
-//    }
-    private String formatTime(int minutes, int hours) {
-        return String.format("%02d", hours) + " : " + String.format("%02d", minutes);
+    private String formatTime(int seconds, int minutes, int hours) {
+        return String.format("%02d", hours) + " : " + String.format("%02d", minutes) + " : " + String.format("%02d", seconds);
     }
+//    private String formatTime(int minutes, int hours) {
+//        return String.format("%02d", hours) + " : " + String.format("%02d", minutes);
+//    }
 
     //타이머 끝
 

@@ -137,8 +137,13 @@ public class WalkRecordActivity extends AppCompatActivity {
 
                             tvCount.setText(String.valueOf(count));
                             tvCountd.setText(String.valueOf(SumD));
-                            tvCountt.setText(String.valueOf(hour) + ":" + String.valueOf(minute));
 
+                            if(minute<10){
+                                tvCountt.setText("0"+String.valueOf(hour) + ":" + "0"+String.valueOf(minute));
+                            }
+                            else {
+                                tvCountt.setText(String.valueOf(hour) + ":" + String.valueOf(minute));
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
