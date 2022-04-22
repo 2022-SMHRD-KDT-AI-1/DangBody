@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,13 +36,20 @@ public class Fragment_community extends Fragment {
 
     public Fragment_community() { }
 
-    RecyclerView recyclerView;
+    TextView tvNick, tvContent, tvlikes;
+    ImageView imgPost;
+    RecyclerView rcv;
     Button btnWrite;
     CommnityAdapter adapter;
     ArrayList<CommunityVO> list = new ArrayList<CommunityVO>();
     RequestQueue requestQueue;
     StringRequest request;
-
+    private int article_seq;
+    private String article_content;
+    private String article_file;
+    private String article_date;
+    private int like;
+    private String user_nick;
     String content, date;
     int likes;
 
@@ -51,8 +60,12 @@ public class Fragment_community extends Fragment {
         View view = inflater.inflate(R.layout.fragment_community, container, false);
 
         //ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_community, container, false );
+        tvNick = view.findViewById(R.id.tvNick);
+        tvContent = view.findViewById(R.id.tvContent);
+        tvlikes = view.findViewById(R.id.tvlikes);
+        imgPost = view.findViewById(R.id.imgPost);
 
-        recyclerView = view.findViewById(R.id.rcv);
+        rcv = view.findViewById(R.id.rcv);
         btnWrite = view.findViewById(R.id.btnWrite);
         adapter = new CommnityAdapter();
         if(requestQueue == null){
@@ -72,12 +85,52 @@ public class Fragment_community extends Fragment {
 
                         try {
                             JSONArray array = new JSONArray(response);
+                            StringBuffer sb = new StringBuffer();
+                            for (int i = 0; i<array.length(); i++){
+                                JSONObject obj = (JSONObject) array.get(i);
+
+                            article_seq = obj.getInt("article_seq");
+                            article_content = obj.getString("article_content");
+                            article_file = obj.getString("article_file");
+                            article_date = obj.getString("article_date");
+                            like = obj.getInt("like");
+                            user_nick = obj.getString("user_nick");
+
+                            sb.append(article_seq);
+                            sb.append("/");
+                            sb.append(article_content);
+                            sb.append("/");
+                            sb.append(article_file);
+                            sb.append("/");
+                            sb.append(article_date);
+                            sb.append("/");
+                            sb.append(like);
+                            sb.append("/");
+                            sb.append(user_nick);
+                            sb.append("\n");
+
+//                            tvNick.setText(user_nick);
+//                            tvContent.setText(article_content);
+//                            tvlikes.setText(String.valueOf(like));
+
+                            }// end
+
+                            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+                            rcv.setLayoutManager(layoutManager);
+                            rcv.setAdapter(adapter);
+
+//                            tvNick.setText(user_nick);
+//                            tvContent.setText(article_content);
+//                            tvlikes.setText(String.valueOf(like));
+
+
+
                             // 고민해볼 부분
-                            JSONObject user = array.getJSONObject(1);
-                            JSONObject com = array.getJSONObject(0);
+//                            JSONObject user = array.getJSONObject(1);
+//                            JSONObject com = array.getJSONObject(0);
                             //JSONArray com = (JSONArray) array.get(0);
 
-                            Log.d("확인해보자", user.getString("user_nick"));
+//                            Log.d("확인해보자", user.getString("user_nick"));
                             //Log.d("확인해보자", com.get(0).toString());
                            /*
                             StringBuffer sb = new StringBuffer();
@@ -114,8 +167,8 @@ public class Fragment_community extends Fragment {
         adapter.addItem(new CommunityVO(R.drawable.base, R.drawable.tori3, "DangBody_USER4", "안녕"));
         adapter.addItem(new CommunityVO(R.drawable.base, R.drawable.jy, "DangBody_USER5", "안녕"));*/
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+//        rcv.setLayoutManager(new LinearLayoutManager(getContext()));
+//        rcv.setAdapter(adapter);
 
         btnWrite.setOnClickListener(new View.OnClickListener() {
             @Override

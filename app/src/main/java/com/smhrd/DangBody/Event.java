@@ -1,11 +1,12 @@
 package com.smhrd.DangBody;
 
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.CalendarView;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Event {
     public static ArrayList<Event> eventsList = new ArrayList<>();
@@ -31,7 +32,6 @@ public class Event {
         this.name = name;
         this.date = date;
         this.time = time;
-
 
 
     }

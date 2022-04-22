@@ -97,8 +97,8 @@ public class JoinPetActivity extends AppCompatActivity {
                                     Toast.makeText(JoinPetActivity.this, "회원가입 실패",Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(JoinPetActivity.this,"회원가입 성공",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(JoinPetActivity.this, MainActivity.class);
-                                    startActivity(intent);
+//                                    Intent intent = new Intent(JoinPetActivity.this, MainActivity.class);
+//                                    startActivity(intent);
 
                                 }
                             }
