@@ -40,7 +40,7 @@ public class Fragment_community extends Fragment {
     ImageView imgPost;
     RecyclerView rcv;
     Button btnWrite;
-    CommnityAdapter adapter;
+
     ArrayList<CommunityVO> list = new ArrayList<CommunityVO>();
     RequestQueue requestQueue;
     StringRequest request;
@@ -67,14 +67,14 @@ public class Fragment_community extends Fragment {
 
         rcv = view.findViewById(R.id.rcv);
         btnWrite = view.findViewById(R.id.btnWrite);
-        adapter = new CommnityAdapter();
+        CommunityAdapter adapter = new CommunityAdapter();
         if(requestQueue == null){
             requestQueue = Volley.newRequestQueue(getActivity());
         }
         Log.d("Fragment_community","들어옴");
 
         String url = "http://220.71.97.178:8082/dangbody/showCommunityService";
-
+//        String imgUrl = "http://"
         request = new StringRequest(
                 Request.Method.POST,
                 url,
@@ -112,12 +112,17 @@ public class Fragment_community extends Fragment {
 //                            tvNick.setText(user_nick);
 //                            tvContent.setText(article_content);
 //                            tvlikes.setText(String.valueOf(like));
+                            adapter.addItem(new CommunityVO(like,user_nick,article_content,article_file));
 
                             }// end
 
                             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
                             rcv.setLayoutManager(layoutManager);
                             rcv.setAdapter(adapter);
+
+                            Log.d("yummy","파일경로"+article_file);
+                            Log.d("yummy","user_nick"+user_nick);
+                            Log.d("yummy","article_seq"+article_seq);
 
 //                            tvNick.setText(user_nick);
 //                            tvContent.setText(article_content);
@@ -159,6 +164,7 @@ public class Fragment_community extends Fragment {
             }
         };
         requestQueue.add(request);
+
 
 /*
         adapter.addItem(new CommunityVO(R.drawable.base, R.drawable.ay, "DangBody_USER1", "안녕"));
