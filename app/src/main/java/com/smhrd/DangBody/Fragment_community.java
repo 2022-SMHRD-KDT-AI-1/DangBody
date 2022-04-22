@@ -41,6 +41,7 @@ public class Fragment_community extends Fragment {
     RecyclerView rcv;
     Button btnWrite;
 
+
     ArrayList<CommunityVO> list = new ArrayList<CommunityVO>();
     RequestQueue requestQueue;
     StringRequest request;

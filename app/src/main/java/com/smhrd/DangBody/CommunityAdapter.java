@@ -1,5 +1,6 @@
 package com.smhrd.DangBody;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -16,10 +19,13 @@ import java.util.ArrayList;
 public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.ViewHolder>{
 
     ArrayList<CommunityVO> items = new ArrayList<CommunityVO>();
+    Context context;
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
+        context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View itemView = inflater.inflate(R.layout.community_item, viewGroup, false);
         return new ViewHolder(itemView);
@@ -35,6 +41,13 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         viewholder.tvlikes.setText(String.valueOf(item.getLikes()));
         viewholder.tvContent.setText(item.getContent());
         viewholder.imgPost.setImageResource(R.drawable.round);
+
+        //load(path) 에 path는 item.getImg()로 채우면 됩니다.
+
+        Glide.with(context)
+             .load(item.getImg())
+             .into(viewholder.imgPost);
+
 
     }
 

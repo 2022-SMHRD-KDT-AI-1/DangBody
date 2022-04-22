@@ -27,6 +27,10 @@ public class Event {
     private LocalDate date;
     private LocalTime time;
 
+    public Event(String name, LocalDate date) {
+        this.name = name;
+        this.date = date;
+    }
 
     public Event(String name, LocalDate date, LocalTime time) {
         this.name = name;
