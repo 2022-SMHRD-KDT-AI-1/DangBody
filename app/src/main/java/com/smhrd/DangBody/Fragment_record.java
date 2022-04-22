@@ -3,15 +3,20 @@ package com.smhrd.DangBody;
 import static com.smhrd.DangBody.CalendarUtils.daysInMonthArray;
 import static com.smhrd.DangBody.CalendarUtils.monthYearFromDate;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +26,23 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Fragment_record extends Fragment {
@@ -41,7 +58,6 @@ public class Fragment_record extends Fragment {
     boolean check= false;
 
 
-
 //    @RequiresApi(api = Build.VERSION_CODES.O)
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -55,6 +71,7 @@ public class Fragment_record extends Fragment {
         btnNextMonth = view.findViewById(R.id.btnNextMonth);
         //체크박스
         checkbox_todo = view.findViewById(R.id.checkbox_todo);
+
 
 
 //        checkbox_todo.setOnClickListener(new View.OnClickListener() {

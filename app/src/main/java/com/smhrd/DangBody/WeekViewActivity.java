@@ -50,6 +50,7 @@ public class WeekViewActivity extends AppCompatActivity{
         ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
 
         com.smhrd.DangBody.CalendarAdapter calendarAdapter = new com.smhrd.DangBody.CalendarAdapter(days, this::onItemClick);
+
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
