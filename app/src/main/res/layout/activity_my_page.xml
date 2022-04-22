@@ -26,7 +26,7 @@
         android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="가족관리"
+        android:text="가족 관리"
         android:textColor="#8B1A47"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
@@ -40,7 +40,7 @@
         android:ems="10"
         android:hint="@string/userId"
         android:inputType="textPersonName"
-        android:text="친구관리"
+        android:text="친구 관리"
         android:textColor="#8B1A47"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView6"
@@ -129,6 +129,27 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:srcCompat="@drawable/ic_dangbody_main" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="댕바디를 만든 친구들"
+        android:textColor="#8B1A47"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+        app:layout_constraintStart_toEndOf="@+id/imageView11" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
