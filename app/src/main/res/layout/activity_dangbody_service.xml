@@ -6,17 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".Dangbody_Service">
 
+    <View
+        android:id="@+id/view13"
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:layout_marginTop="24dp"
+        android:background="#8baa80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView48" />
+
     <TextView
         android:id="@+id/textView39"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="casual"
         android:text="ⓒ 2022 DangBody All Rights Reserved."
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="casual"
+        android:text="dangdang@dangbody.com"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView39"
+        app:layout_constraintEnd_toEndOf="@+id/textView39"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/textView39" />
 
     <ImageView
         android:id="@+id/imageView13"
@@ -31,10 +55,11 @@
         android:id="@+id/textView40"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:fontFamily="casual"
         android:text="Boram Choi"
         android:textColor="#494949"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView13"
         app:layout_constraintStart_toEndOf="@+id/imageView13" />
@@ -43,7 +68,7 @@
         android:id="@+id/imageView14"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/imageView15"
         app:layout_constraintTop_toBottomOf="@+id/imageView15"
         app:srcCompat="@drawable/icons_im" />
@@ -52,10 +77,11 @@
         android:id="@+id/textView44"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:fontFamily="casual"
         android:text="Saerom Im"
         android:textColor="#494949"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView14"
         app:layout_constraintStart_toEndOf="@+id/imageView14" />
@@ -73,10 +99,11 @@
         android:id="@+id/textView43"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:fontFamily="casual"
         android:text="Jiwon Jang"
         android:textColor="#494949"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView16"
         app:layout_constraintStart_toEndOf="@+id/imageView16" />
@@ -85,7 +112,7 @@
         android:id="@+id/imageView15"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/textView46"
         app:layout_constraintTop_toBottomOf="@+id/textView46"
         app:srcCompat="@drawable/icons_kim" />
@@ -94,10 +121,11 @@
         android:id="@+id/textView42"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:fontFamily="casual"
         android:text="Hanjin Kim"
         android:textColor="#494949"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView15"
         app:layout_constraintStart_toEndOf="@+id/imageView15" />
@@ -106,7 +134,7 @@
         android:id="@+id/imageView17"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@+id/textView45"
         app:layout_constraintTop_toBottomOf="@+id/textView45"
         app:srcCompat="@drawable/icons_park" />
@@ -118,7 +146,7 @@
         android:fontFamily="casual"
         android:text="Jaesung Park"
         android:textColor="#494949"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView17"
         app:layout_constraintStart_toEndOf="@+id/imageView17" />
@@ -127,25 +155,60 @@
         android:id="@+id/textView45"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="48dp"
         android:text="TEAM LEADER"
         android:textColor="#ff6041"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
     <TextView
         android:id="@+id/textView46"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="32dp"
         android:text="TEAM MEMBER"
         android:textColor="#008968"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/imageView17"
         app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:text="저희 댕바디를 이용해주셔서 감사합니다."
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="저희는 반려견의 건강하고 행복한 삶을 응원하며\n반려인과 반려견 모두가 만족하는 서비스를 제공하기 위해 노력하겠습니다."
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/textView47"
+        app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
+    <TextView
+        android:id="@+id/textView50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="댕바디를 만든 친구들"
+        android:textColor="#525252"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view13" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
