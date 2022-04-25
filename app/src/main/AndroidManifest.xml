@@ -23,6 +23,9 @@
             android:name=".Dangbody_Service"
             android:exported="false" />
         <activity
+            android:name=".DangbodyGallery"
+            android:exported="false" />
+        <activity
             android:name=".JoinFriend"
             android:exported="false" />
         <activity
