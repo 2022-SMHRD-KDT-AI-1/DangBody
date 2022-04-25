@@ -83,7 +83,7 @@ public class JoinActivity extends AppCompatActivity {
                 String day = spd.getSelectedItem().toString();
                 Log.d("확인",year+month+day);
 
-                String url = "http://3.19.217.154:8080/dangbody/JoinService";
+                String url = "http://dangbody.ddns.net:8080/dangbody/JoinService";
                 Log.d("확인","클릭완");
 
                 request = new StringRequest(

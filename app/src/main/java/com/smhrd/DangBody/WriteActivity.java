@@ -158,7 +158,7 @@ public class WriteActivity extends AppCompatActivity {
 
 
         //base64형태로 변환된 이미지 데이터를 플라스크 서버로 전송
-        String url = "http://3.19.217.154:8080/dangbody/CommunityService";
+        String url = "http://dangbody.ddns.net:8080/dangbody/CommunityService";
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override

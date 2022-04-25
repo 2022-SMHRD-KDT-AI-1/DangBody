@@ -74,7 +74,7 @@ public class Fragment_community extends Fragment {
         }
         Log.d("Fragment_community","들어옴");
 
-        String url = "http://3.19.217.154:8080/dangbody/showCommunityService";
+        String url = "http://dangbody.ddns.net:8080/dangbody/showCommunityService";
 //        String imgUrl = "http://"
         request = new StringRequest(
                 Request.Method.POST,
