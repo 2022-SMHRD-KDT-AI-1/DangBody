@@ -83,7 +83,7 @@ public class JoinActivity extends AppCompatActivity {
                 String day = spd.getSelectedItem().toString();
                 Log.d("확인",year+month+day);
 
-                String url = "http://dangbody.ddns.net:8080/dangbody/JoinService";
+                String url = "http://3.19.217.154:8080/dangbody/JoinService";
                 Log.d("확인","클릭완");
 
                 request = new StringRequest(
@@ -96,8 +96,9 @@ public class JoinActivity extends AppCompatActivity {
                                     Toast.makeText(JoinActivity.this, "회원가입 실패",Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(JoinActivity.this,"회원가입 성공",Toast.LENGTH_SHORT).show();
-//                                    Intent intent = new Intent(JoinActivity.this, MainActivity.class);
-//                                    startActivity(intent);
+                                    Intent intent = new Intent(JoinActivity.this, JoinPetActivity.class);
+                                    intent.putExtra("user_id",id);
+                                    startActivity(intent);
 
                                 }
                             }

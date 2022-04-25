@@ -37,7 +37,7 @@ public class JoinPetActivity extends AppCompatActivity {
     Spinner spinnerPetBirthYear, spinnerPetBirthMonth, spinnerPetBirthDay, spinnerPetYear, spinnerPetMonth, spinnerPetDay;
     String petGender;
     String petNeutral;
-
+    Intent idIntent;
     String name,weight, petBYear, petBMonth, petBDay,petYear,petMonth,petDay,user_id;
 
     RequestQueue requestQueue;
@@ -83,9 +83,9 @@ public class JoinPetActivity extends AppCompatActivity {
                 Log.d(TEST, petYear);
                 Log.d(TEST, petGender);
 
-                String url = "http://dangbody.ddns.net:8080/dangbody/JoinPetService";
+                String url = "http://3.19.217.154:8080/dangbody/JoinPetService";
                 Log.d("확인","클릭완");
-                Intent idIntent = getIntent();
+
 
                 request = new StringRequest(
                         Request.Method.POST,
@@ -94,11 +94,11 @@ public class JoinPetActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(String response) {
                                 if(response.equals("0")){
-                                    Toast.makeText(JoinPetActivity.this, "회원가입 실패",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(JoinPetActivity.this, "댕댕이 등록 실패",Toast.LENGTH_SHORT).show();
                                 }else{
-                                    Toast.makeText(JoinPetActivity.this,"회원가입 성공",Toast.LENGTH_SHORT).show();
-//                                    Intent intent = new Intent(JoinPetActivity.this, MainActivity.class);
-//                                    startActivity(intent);
+                                    Toast.makeText(JoinPetActivity.this,"댕댕이 등록 성공",Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(JoinPetActivity.this, MainActivity.class);
+                                    startActivity(intent);
 
                                 }
                             }
@@ -151,8 +151,7 @@ public class JoinPetActivity extends AppCompatActivity {
 
         petNeutral = getPetNeutral();
 
-        sp = getSharedPreferences("autoLogin",0);
-        user_id = sp.getString("userId","idnotfound").toString();
+        user_id = idIntent.getStringExtra("user_id");
     }
 
     private String getGender() {
@@ -174,6 +173,7 @@ public class JoinPetActivity extends AppCompatActivity {
     }
 
     private void init() {
+        idIntent = getIntent();
         edtPetName = findViewById(R.id.edtPetName);
         edtPetWeight = findViewById(R.id.edtPetWeight);
         btnJoinPet = findViewById(R.id.btnJoinPet);

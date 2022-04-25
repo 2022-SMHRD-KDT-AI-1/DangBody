@@ -163,7 +163,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 isWalking = false;
-                                String url = "http://dangbody.ddns.net:8080/dangbody/WalkService";
+                                String url = "http://3.19.217.154:8080/dangbody/WalkService";
 
                                 Toast.makeText(getActivity(), walkTime, Toast.LENGTH_SHORT).show();
                /* Log.d("넘어가라고!!!!!",walkTime);
