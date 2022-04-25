@@ -33,7 +33,7 @@ public class WalkRecordActivity extends AppCompatActivity {
     SharedPreferences loginData;
     String userID;
 
-    String walk_time, walk_distance, walk_date;
+    String walk_time, walk_distance, walk_date, SumD2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +89,7 @@ public class WalkRecordActivity extends AppCompatActivity {
                                 walk_time = obj.getString("walk_time");
                                 walk_distance = obj.getString("walk_distance");
                                 double wd = Double.parseDouble(walk_distance);
+
                                 String wth = walk_time.substring(0,2);
                                 String wtm = walk_time.substring(walk_time.length()-2,walk_time.length());
                                 hour = Integer.parseInt(wth);
@@ -134,9 +135,11 @@ public class WalkRecordActivity extends AppCompatActivity {
                             LinearLayoutManager layoutManager = new LinearLayoutManager(WalkRecordActivity.this,LinearLayoutManager.VERTICAL,false );
                             rvWalkRecord.setLayoutManager(layoutManager);
                             rvWalkRecord.setAdapter(adapter);
+                            SumD2 = String.format("%.1f",SumD);
 
                             tvCount.setText(String.valueOf(count));
-                            tvCountd.setText(String.valueOf(SumD));
+//                            tvCountd.setText(String.valueOf(SumD));
+                            tvCountd.setText(SumD2);
 
                             if(minute<10){
                                 tvCountt.setText("0"+String.valueOf(hour) + ":" + "0"+String.valueOf(minute));

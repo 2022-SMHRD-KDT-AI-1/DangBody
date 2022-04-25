@@ -162,6 +162,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                isWalking = false;
                                 String url = "http://dangbody.ddns.net:8080/dangbody/WalkService";
 
                                 Toast.makeText(getActivity(), walkTime, Toast.LENGTH_SHORT).show();
@@ -260,7 +261,7 @@ public class Fragment_activity extends Fragment implements OnMapReadyCallback {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                isWalking = true;
                 startLocationService();
                 startTapped(null);
             }
