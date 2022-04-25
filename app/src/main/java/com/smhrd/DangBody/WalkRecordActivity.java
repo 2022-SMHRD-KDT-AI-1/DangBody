@@ -62,7 +62,7 @@ public class WalkRecordActivity extends AppCompatActivity {
             queue = Volley.newRequestQueue(WalkRecordActivity.this);
         }
 
-        String serverUrl = "http://3.19.217.154:8080/dangbody/showRecord";
+        String serverUrl = "http://dangbody.ddns.net:8080/dangbody/showRecord";
 
         // 서버에 요청한 후 응답데이터를 Log.d()로 출력하시오.
         request = new StringRequest(
@@ -113,10 +113,10 @@ public class WalkRecordActivity extends AppCompatActivity {
                                 Log.d("main","walk_time" + walk_distance);
 
                                 if(wd < 1 && wd!=0) {
-                                    adapter.addItem(new WalkRecord(walk_time+"분", "0"+walk_distance + "km", walk_date));
+                                    adapter.addItem(new WalkRecord(walk_time, "0"+walk_distance + "km", walk_date));
                                 }
                                 else{
-                                    adapter.addItem(new WalkRecord(walk_time+"분", walk_distance + "km", walk_date));
+                                    adapter.addItem(new WalkRecord(walk_time, walk_distance + "km", walk_date));
                                 }
 
 
