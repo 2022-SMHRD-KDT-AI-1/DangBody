@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.provider.MediaStore;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class Fragment_home extends Fragment {
     TextView details;
     CardView cardView;
     ViewPager viewPager;
+    static final int GET_GALLERY_IMAGE = 2;
 
 
     public Fragment_home() { }
@@ -139,9 +141,9 @@ public class Fragment_home extends Fragment {
         btn_dangbodyGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent i = new Intent(getActivity(), DangbodyGallery.class);
-                startActivity(i);
+                gallery_open_intent();
+//                Intent i = new Intent(getActivity(),DangbodyGallery.class);
+//                startActivity(i);
             }
         });
 
@@ -162,6 +164,12 @@ public class Fragment_home extends Fragment {
 
 
 
+    }
+
+    private void gallery_open_intent() {
+
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, GET_GALLERY_IMAGE);
     }
 
 //    public void fllipperImages(int image) {
