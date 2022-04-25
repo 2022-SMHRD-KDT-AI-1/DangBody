@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginConn() {
-        String url = "http://3.19.217.154:8080/dangbody/LoginService";
+        String url = "http://dangbody.ddns.net:8080/dangbody/LoginService";
         //Log.d("확인","클릭완");
         request = new StringRequest(
                 Request.Method.POST,
