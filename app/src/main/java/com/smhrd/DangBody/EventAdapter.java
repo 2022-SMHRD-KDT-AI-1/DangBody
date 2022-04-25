@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class EventAdapter extends ArrayAdapter<com.smhrd.DangBody.Event>
     private RequestQueue requestQueue;
     private StringRequest request;
     String date, time, title;
+//    RadioButton eventCellTV;
 
 
 
@@ -52,19 +54,17 @@ public class EventAdapter extends ArrayAdapter<com.smhrd.DangBody.Event>
     @RequiresApi(api = Build.VERSION_CODES.O)
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
-    {
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         com.smhrd.DangBody.Event event = getItem(position);
-
 
 
         if (convertView == null)
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.event_cell, parent, false);
 
-            TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
+        TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
 
-            String eventTitle = event.getName() +" "+ CalendarUtils.formattedTime(event.getTime());
-            eventCellTV.setText(eventTitle);
+        String eventTitle = event.getName() + " " + CalendarUtils.formattedTime(event.getTime());
+        eventCellTV.setText(eventTitle);
 
 //        체크박스
         checkbox_todo = convertView.findViewById(R.id.checkbox_todo);
