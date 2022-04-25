@@ -175,7 +175,7 @@ public class WriteActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        progress.dismiss();
+//                        progress.dismiss();
                         Toast.makeText(WriteActivity.this, "Some error occurred -> "+error, Toast.LENGTH_LONG).show();
                     }
                 }){
@@ -190,7 +190,17 @@ public class WriteActivity extends AppCompatActivity {
             }
         };
 
+        request.setRetryPolicy(new com.android.volley.DefaultRetryPolicy(
+
+                20000 ,
+
+                com.android.volley.DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+
+                com.android.volley.DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+
         requestQueue.add(request);
+
     }
 
 

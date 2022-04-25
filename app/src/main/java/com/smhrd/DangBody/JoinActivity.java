@@ -34,6 +34,7 @@ public class JoinActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     StringRequest request;
     ImageView checkImg;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class JoinActivity extends AppCompatActivity {
         btnJoin2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String id = edtJoinId.getText().toString();
+                id = edtJoinId.getText().toString();
                 String pw = edtJoinPw.getText().toString();
                 String name = edtJoinName.getText().toString();
                 String nick = edtJoinNick.getText().toString();
@@ -96,10 +97,6 @@ public class JoinActivity extends AppCompatActivity {
                                     Toast.makeText(JoinActivity.this, "회원가입 실패",Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(JoinActivity.this,"회원가입 성공",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(JoinActivity.this, JoinPetActivity.class);
-                                    intent.putExtra("user_id",id);
-                                    startActivity(intent);
-
                                 }
                             }
                         },
@@ -125,7 +122,8 @@ public class JoinActivity extends AppCompatActivity {
                     }
                 };
                 requestQueue.add(request);
-                Intent intent = new Intent(JoinActivity.this,JoinPetActivity.class);
+                Intent intent = new Intent(JoinActivity.this, JoinPetActivity.class);
+                intent.putExtra("user_id",id);
                 startActivity(intent);
             }
         });

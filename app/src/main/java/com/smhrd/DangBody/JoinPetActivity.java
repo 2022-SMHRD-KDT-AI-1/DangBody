@@ -97,8 +97,6 @@ public class JoinPetActivity extends AppCompatActivity {
                                     Toast.makeText(JoinPetActivity.this, "댕댕이 등록 실패",Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(JoinPetActivity.this,"댕댕이 등록 성공",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(JoinPetActivity.this, MainActivity.class);
-                                    startActivity(intent);
 
                                 }
                             }
@@ -128,7 +126,8 @@ public class JoinPetActivity extends AppCompatActivity {
                     }
                 };
                 requestQueue.add(request);
-
+                Intent intent = new Intent(JoinPetActivity.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });
